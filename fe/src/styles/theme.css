@@ -1,0 +1,95 @@
+@font-face {
+  font-family: Pretendard Variable;
+  src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable.css')
+    format('woff');
+}
+
+/* Theme */
+:root {
+  /* font-family */
+  --font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
+    'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+
+  /* font-size */
+  --font-size-display: 24px;
+
+  --font-size-title-md: 16px;
+  --font-size-title-sm: 14px;
+  --font-size-title-xs: 12px;
+
+  --font-size-body-md: 16px;
+  --font-size-body-sm: 14px;
+  --font-size-body-xs: 12px;
+
+  /* font-weight */
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* color */
+  --color-white-70: rgba(255, 255, 255, 0.7);
+  --color-white: #fff;
+  --color-off-white: #f5f7f9;
+  --color-gray-100: #d2dae0;
+  --color-gray-200: #879298;
+  --color-gray-300: #6e8091;
+  --color-gray-400: #5f6e76;
+  --color-gray-500: #4b5966;
+  --color-black: #14212b;
+  --color-primary: #4362d0;
+
+  /* filter */
+  --selected-viewer-filter: invert(39%) sepia(87%) saturate(438%) hue-rotate(188deg) brightness(89%) contrast(106%);
+  --unselected-viewer-filter: invert(93%) sepia(11%) saturate(143%) hue-rotate(164deg) brightness(96%) contrast(86%);
+  /* shadow */
+  /* component */
+}
+
+.display {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-display);
+  line-height: auto;
+}
+
+.title-md {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-title-md);
+  line-height: auto;
+}
+
+.title-sm {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-title-sm);
+  line-height: auto;
+}
+
+.title-xs {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-title-xs);
+  line-height: auto;
+}
+
+.body-md {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-body-md);
+  line-height: 22px;
+}
+
+.body-sm {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-title-sm);
+  line-height: auto;
+}
+
+.body-xs {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-title-xs);
+  line-height: auto;
+}
