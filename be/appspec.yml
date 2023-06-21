@@ -2,7 +2,7 @@ version: 0.0 # CodeDeploy 버전
 os: linux
 files:
   - source: / # CodeDeploy에 있는 파일 위치
-    destination: /home/ubuntu/app # EC2로 전달할 위치
+    destination: /home/ubuntu/app/ # EC2로 전달할 위치
     overwrite: yes
 
 permissions:
