@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+// PR 프로젝트 테스트용 수정
 class MemoryProductRepositoryTest {
 
     private ProductRepository productRepository;
