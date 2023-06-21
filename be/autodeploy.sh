@@ -10,5 +10,5 @@ else
 fi
 
 echo "서버 시작"
-nohup java -jar ~/app/build/libs/be-0.0.1-SNAPSHOT.jar >../log.txt 2>&1 &
+sudo nohup java -jar ~/app/build/libs/be-0.0.1-SNAPSHOT.jar >../log.txt 2>&1 &
 echo "배포 완료!"
