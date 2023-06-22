@@ -1,65 +1,69 @@
-# 카페 키오스크 프로젝트 🤖
 
-- 코드스쿼드 그룹 프로젝트 카페 키오스크
-- 기간: 2023.06.19. ~ 2023.06.30.
+![](https://img.shields.io/badge/Last_Upadate-2023--06--22-blue)
+![](https://img.shields.io/badge/Sprint-1-green)
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2F%2Fcodesquad-gwanaksan%2Fkiosk-max%2Fgoto%2Fbadge%3Fref%3Ddev&style=flat)](https://actions-badge.atrox.dev//codesquad-gwanaksan/kiosk-max/goto/goto?ref=dev)
 
-### 팀원 소개
+# ☕️ 카페 키오스크 프로젝트
+- 2023 코드스쿼드 마스터즈 Max에서 진행한 "카페 키오스크"를 구현하는 그룹 프로젝트 
+- 미션 기간: 2023-06-19 ~ 2023-06-30
+- 프로젝트 Wiki → <a href="https://github.com/codesquad-gwanaksan/kiosk-max/wiki"><img src = "https://img.shields.io/badge/Kiosk_Home-black?logo=Wikipedia"></a>
 
-| ![Jinny](https://ca.slack-edge.com/T74H5245A-U04FBH4JC8N-58db7ac4b237-512) | ![litae](https://ca.slack-edge.com/T74H5245A-U04FLR740EA-794e3d7f3967-512) | ![Sully](https://ca.slack-edge.com/T74H5245A-U04G77HQF32-50b19d5bee54-512) | ![TOMMY](https://ca.slack-edge.com/T74H5245A-U04FHRKM71R-f5315c8f4532-512) | ![네모네모](https://ca.slack-edge.com/T74H5245A-U04FHMZMB50-34d5ca999794-512) | ![조이](https://ca.slack-edge.com/T74H5245A-U04FHEYNKPC-c383864b42a2-512) |
-| :------------------------------------------------------------------------: | :------------------------------------------------------------------------: | :------------------------------------------------------------------------: | :------------------------------------------------------------------------: | :---------------------------------------------------------------------------: | :-----------------------------------------------------------------------: |
-|                [**Jinny(BE)**](https://github.com/jinny-l)                 |                [**litae(FE)**](https://github.com/qkdflrgs)                |                [**Sully(BE)**](https://github.com/won4885)                 |               [**TOMMY(BE)**](https://github.com/HyowonSin)                |            [**네모네모(BE)**](https://github.com/yonghwankim-dev)             |                [**조이(FE)**](https://github.com/youzysu)                 |
+<br/>
 
-## 기술 스택
+## 🧑🏻‍💻팀원 소개
+|                                                       프론트엔드                                                       |                                                      프론트엔드                                                       |                                                       백엔드                                                       |                                                       백엔드                                                       |                                                         백엔드                                                         |                                                               백엔드                                                               |
+|:-----------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------:|
+| <a href="https://github.com/qkdflrgs"><img src = "https://avatars.githubusercontent.com/qkdflrgs" width="120px;"> | <a href="https://github.com/youzysu"><img src = "https://avatars.githubusercontent.com/youzysu" width="120px;">  | <a href="https://github.com/jinny-l"><img src = "https://avatars.githubusercontent.com/jinny-l" width="120px;"> | <a href="https://github.com/won4885"><img src = "https://avatars.githubusercontent.com/won4885" width="120px;"> | <a href="https://github.com/HyowonSin"><img src = "https://avatars.githubusercontent.com/HyowonSin" width="120px;"> | <a href="https://github.com/yonghwankim-dev"><img src = "https://avatars.githubusercontent.com/yonghwankim-dev" width="120px;"> |                                         |                                         |
+|                                     [**litae**](https://github.com/qkdflrgs)                                      |                                       [**조이**](https://github.com/youzysu)                                       |                                     [**Jinny**](https://github.com/jinny-l)                                     |                                     [**Sully**](https://github.com/won4885)                                     |                                      [**TOMMY**](https://github.com/HyowonSin)                                      |                                         [**네모네모**](https://github.com/yonghwankim-dev)                                          |
 
-## 협업 전략
+<br/>
 
-### 📌 그라운드룰
+## 🖥️ 동작 화면
 
-1. 데일리 스크럼: 매일 **오전 10:00 ~ 10:30**
+<br/>
 
-   - 스크럼 마스터
-     - 1주차
-       - 월요일: Jinny
-       - 화요일: Zoey, 네모네모
-       - 수요일: litae, Tommy
-       - 목요일: 네모네모, Jinny
-       - 금요일: Sully, Zoey
-   - 역할: 회의록, 스크럼 리더
-     - 모두 참석하기
-       - 슬랙 채널: 일정이 있어 불참할 예정이라면 스레드에 공유하기
-     - 한명씩 돌아가면서 스크럼 진행하기
-       - 현재 컨디션(1~10점), 각자 어제 작업한 내용, 오늘 작업할 내용 간단 공유하기
-       - 각 클래스 별 진행 상황 공유하기
+## 🔧️ 개발 환경
+### Front-End
 
-1. PR 제출 기한: 매주 금요일 12:00까지
+### Back-End
+![](https://img.shields.io/badge/Java-007396?style=flat&logo=Java&logoColor=white) 
+![](https://img.shields.io/badge/SpringBoot-6DB33F?style=flat&logo=SpringBoot&logoColor=white)
+![](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=white)
+![](https://img.shields.io/badge/Amazon_AWS-232F3E?style=flat&logo=amazonaws)
 
-1. DEMO 전체 공유: 매주 금요일 14:00
+- Java: `JDK 11`
+- SpringBoot: `ver. 2.7.12`
+- MySQL: `ver. 8.0.32`
+- Amazon AWS: `EC2`, `S3`, `RDS`, `CodeDeploy`
 
-1. 주간 회고: 매주 금요일 15:00 ~ 15:30
+<br/>
 
-### 📌 브랜치 전략
+## ⚙️ 인프라 구조
+### Front-End
 
-- Upstream
-  - branch: team-03
-- Origin
-  - team-03: 배포 브랜치
-  - dev: be + fe
-    - dev-fe
-      - feature/fe/...
-    - dev-be
-      - feature/be/...
+### Back-End
+![Kiosk-Architecture](https://github.com/codesquad-gwanaksan/kiosk-max/assets/108214590/e858b08d-8ae9-49b2-a015-2c84c1dd658c)
 
-### 📌 Commit Template
+<br/>
 
-- `✨feat` : 새로운 기능 추가
-- `🐛fix` : 버그 수정
-- `♻️refactor` : 코드 리팩토링
-- `✅test` : 테스트 코드
-- `📝docs` : 문서 수정
-- `🎨style` : 코드 포맷팅, 세미콜론 누락, 코드 변경이 없는 경우
-- `💄design` : CSS 등 사용자 UI 디자인 변경
-- `🔧chore` : 빌드 업무 수정, 패키지 매니저 수정 (패키지 설치, 개발 환경 세팅)
-- `🔀merge` : merge
-- `🚚rename`: 디렉토리 및 파일명 변경
-- `🌱comment`: 주석 추가 혹은 오타 수정
-- `➕add`: 의존성 추가
+## 💾 ERD
+![](https://github.com/codesquad-gwanaksan/kiosk-max/assets/108214590/aa77333f-274f-4c2d-9cf7-a90e99989977)
+
+<br/>
+
+## 🌎 API 명세서
+| 기능       | HTTP Method | URL                            |
+|:---------|:------------|:-------------------------------|
+| 메뉴 조회    | `GET`       | /menus                         |
+| 카드 결제 요청 | `POST`      | /api/payment/card              |
+| 현금 결제 요청 | `POST`      | /api/payment/cash              |
+| 영수증 조회   | `GET`       | /api/receipt?orderId={orderId} |
+
+<br/>
+
+## 🤝 협업 전략
+- [그라운드 룰]()
+- [커밋 컨밴션]()
+- PR 컨밴션
+- [브랜치 전략]()
+
