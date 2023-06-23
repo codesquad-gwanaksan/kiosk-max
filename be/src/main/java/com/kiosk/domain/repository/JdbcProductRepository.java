@@ -2,7 +2,7 @@ package com.kiosk.domain.repository;
 
 import com.kiosk.domain.entity.Category;
 import com.kiosk.domain.entity.Product;
-import com.kiosk.web.controller.dto.MenuDto;
+import com.kiosk.web.controller.dto.ProductDto;
 import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.Objects;
@@ -27,7 +27,7 @@ public class JdbcProductRepository implements ProductRepository {
     }
 
     @Override
-    public Long save(final MenuDto dto) {
+    public Long save(final ProductDto dto) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         template.update(connection -> {
             Category category = categoryRepository.findBy(dto.getCategoryId()).orElseThrow();

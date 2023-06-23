@@ -1,6 +1,6 @@
 package com.kiosk.web.controller;
 
-import com.kiosk.web.controller.dto.MenuDto;
+import com.kiosk.web.controller.dto.ProductDto;
 import com.kiosk.web.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -17,10 +17,10 @@ public class TestController {
 
     private final ProductService productService;
 
-    @PostMapping("/addMenu")
-    public String add(@RequestBody MenuDto menuDto) {
-        logger.debug("menuDto : {}", menuDto);
-        Long id = productService.save(menuDto);
+    @PostMapping("/addProduct")
+    public String add(@RequestBody ProductDto productDto) {
+        logger.debug("productDto : {}", productDto);
+        Long id = productService.save(productDto);
         return "success : " + id;
     }
 }

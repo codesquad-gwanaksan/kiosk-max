@@ -13,9 +13,9 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class MenuDto {
+public class ProductDto {
 
-    private Long menuId;            // 상품 아이디
+    private Long productId;            // 상품 아이디
     private String name;        // 이름
     private Long price;         // 가격
     private String imgUrl;       // 이미지 저장 경로
@@ -27,8 +27,8 @@ public class MenuDto {
     private boolean hasSmall;   // 스몰 사이즈 가능 여부
     private Long categoryId;    // 카테고리 아이디
 
-    public MenuDto(final Product product) {
-        this.menuId = product.getId();
+    public ProductDto(final Product product) {
+        this.productId = product.getId();
         this.name = product.getName();
         this.price = product.getPrice();
         this.imgUrl = product.getImageUrl();
@@ -42,7 +42,7 @@ public class MenuDto {
 
     public Product toEntity() {
         return Product.builder()
-            .id(menuId)
+            .id(productId)
             .name(name)
             .price(price)
             .imageUrl(imgUrl)
@@ -59,8 +59,8 @@ public class MenuDto {
         return Objects.equals(category.getId(), categoryId);
     }
 
-    public void setMenuId(final Long menuId) {
-        this.menuId = menuId;
+    public void setProductId(final Long productId) {
+        this.productId = productId;
     }
 
 

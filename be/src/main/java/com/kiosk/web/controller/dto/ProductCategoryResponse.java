@@ -8,9 +8,9 @@ import lombok.Getter;
 @AllArgsConstructor
 @Builder
 @Getter
-public class MenuCategoryResponse {
+public class ProductCategoryResponse {
 
     private String categoryName;
     private Long categoryId;
-    private List<MenuDto> menus;
+    private List<ProductDto> products;
 }

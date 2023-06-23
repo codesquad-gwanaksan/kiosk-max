@@ -1,7 +1,7 @@
 package com.kiosk.web.service;
 
 import com.kiosk.domain.repository.ProductRepository;
-import com.kiosk.web.controller.dto.MenuDto;
+import com.kiosk.web.controller.dto.ProductDto;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
@@ -13,14 +13,14 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public List<MenuDto> findAll() {
+    public List<ProductDto> findAll() {
         return productRepository.findAll()
             .stream()
-            .map(MenuDto::new)
+            .map(ProductDto::new)
             .collect(Collectors.toUnmodifiableList());
     }
 
-    public Long save(final MenuDto menuDto) {
-        return productRepository.save(menuDto);
+    public Long save(final ProductDto productDto) {
+        return productRepository.save(productDto);
     }
 }

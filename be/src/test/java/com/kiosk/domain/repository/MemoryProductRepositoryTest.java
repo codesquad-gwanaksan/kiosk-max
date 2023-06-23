@@ -4,7 +4,7 @@ import static com.kiosk.domain.entity.CategoryType.*;
 
 import com.kiosk.domain.entity.Category;
 import com.kiosk.domain.entity.Product;
-import com.kiosk.web.controller.dto.MenuDto;
+import com.kiosk.web.controller.dto.ProductDto;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -36,9 +36,9 @@ class MemoryProductRepositoryTest {
             .hasSmall(true)
             .category(category)
             .build();
-        MenuDto menuDto = new MenuDto(product);
+        ProductDto productDto = new ProductDto(product);
         // when
-        Long id = productRepository.save(menuDto);
+        Long id = productRepository.save(productDto);
         // then
         Product findProduct = productRepository.findBy(id).orElseThrow();
         SoftAssertions.assertSoftly(softAssertions ->
