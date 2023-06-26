@@ -1,10 +1,6 @@
 package com.kiosk.domain.repository;
 
 import static com.kiosk.api.product.domain.entity.CategoryType.COFFEE;
-import static com.kiosk.api.product.domain.entity.CategoryType.JUICE;
-import static com.kiosk.api.product.domain.entity.CategoryType.LATTE;
-import static com.kiosk.api.product.domain.entity.CategoryType.SPARKLING;
-import static com.kiosk.api.product.domain.entity.CategoryType.TEA;
 
 import com.kiosk.api.product.domain.entity.Category;
 import com.kiosk.api.product.domain.entity.Product;
@@ -13,15 +9,21 @@ import com.kiosk.api.product.domain.repository.ProductRepository;
 import com.kiosk.api.product.web.controller.dto.ProductDto;
 import java.util.List;
 import org.assertj.core.api.SoftAssertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.stereotype.Repository;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
-@SpringBootTest
+// Repository 애노테이션이 붙은 클래스만 빈으로 등록
+@DataJpaTest(includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Repository.class))
+// Replace.NONE으로 설정하면 @ActiveProfiles에 설정한 프로파일 환경값에 따라 데이터소스가 적용된다.
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles(profiles = {"test"})
 class JdbcProductRepositoryTest {
 
@@ -63,7 +65,6 @@ class JdbcProductRepositoryTest {
     @DisplayName("상품 정보들을 요청하고 성공적으로 응답한다")
     @Transactional
     public void findAll() {
-        // given
         // when
         List<Product> products = productRepository.findAll();
         // then
