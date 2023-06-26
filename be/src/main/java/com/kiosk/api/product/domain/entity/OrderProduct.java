@@ -12,4 +12,5 @@ public class OrderProduct {
     private Long orderProductId;
     private Long orderId;
     private Long productId;
+    private String productName;
 }
