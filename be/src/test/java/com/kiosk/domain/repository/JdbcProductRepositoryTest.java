@@ -18,9 +18,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
+@ActiveProfiles(profiles = {"test"})
 class JdbcProductRepositoryTest {
 
     @Autowired
@@ -28,17 +30,6 @@ class JdbcProductRepositoryTest {
 
     @Autowired
     private CategoryRepository categoryRepository;
-
-    @BeforeEach
-    public void setup() {
-        productRepository.deleteAll();
-        categoryRepository.deleteAll();
-        categoryRepository.save(Category.builder().categoryType(COFFEE).build());
-        categoryRepository.save(Category.builder().categoryType(JUICE).build());
-        categoryRepository.save(Category.builder().categoryType(TEA).build());
-        categoryRepository.save(Category.builder().categoryType(LATTE).build());
-        categoryRepository.save(Category.builder().categoryType(SPARKLING).build());
-    }
 
     @Transactional
     @Test
@@ -48,9 +39,9 @@ class JdbcProductRepositoryTest {
         Long category_id = categoryRepository.findBy(COFFEE.name()).orElseThrow().getId();
         Category category = Category.builder().id(category_id).categoryType(COFFEE).build();
         Product product = Product.builder()
-            .name("아메리카노")
+            .name("에스프레소")
             .price(4000L)
-            .imageUrl("path")
+            .imageUrl("imageUrl")
             .isBest(false)
             .hasHot(true)
             .hasIce(true)
@@ -73,27 +64,11 @@ class JdbcProductRepositoryTest {
     @Transactional
     public void findAll() {
         // given
-        Long category_id = categoryRepository.findBy(COFFEE.name()).orElseThrow().getId();
-        Category category = Category.builder().id(category_id).categoryType(COFFEE).build();
-        Product product = Product.builder()
-            .name("아메리카노")
-            .price(4000L)
-            .imageUrl("path")
-            .isBest(false)
-            .hasHot(true)
-            .hasIce(true)
-            .hasLarge(true)
-            .hasSmall(true)
-            .category(category)
-            .build();
-        ProductDto productDto = new ProductDto(product);
-        productRepository.save(productDto);
         // when
         List<Product> products = productRepository.findAll();
         // then
         SoftAssertions.assertSoftly(softAssertions -> {
-            softAssertions.assertThat(products.size()).isEqualTo(1);
-            softAssertions.assertThat(products.get(0).getName()).isEqualTo("아메리카노");
+            softAssertions.assertThat(products.size()).isEqualTo(25);
         });
     }
 }
