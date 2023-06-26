@@ -1,62 +1,94 @@
 package com.kiosk.api.product.web.controller;
 
-import static com.kiosk.api.product.domain.entity.CategoryType.*;
-import static java.nio.charset.StandardCharsets.UTF_8;
+import static com.kiosk.api.product.domain.entity.CategoryType.COFFEE;
+import static org.hamcrest.Matchers.equalTo;
+import static org.mockito.Mockito.when;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kiosk.api.product.domain.entity.Category;
-import com.kiosk.api.product.domain.entity.CategoryType;
-import com.kiosk.api.product.web.controller.dto.ProductCategoryResponse;
-import java.util.Arrays;
+import com.kiosk.api.product.domain.entity.Product;
+import com.kiosk.api.product.web.controller.dto.ProductDto;
+import com.kiosk.api.product.web.service.CategoryService;
+import com.kiosk.api.product.web.service.ProductService;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-@SpringBootTest
+
 @ActiveProfiles(profiles = {"test"})
-@AutoConfigureMockMvc
+@WebMvcTest(ProductController.class)
 class ProductControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    private ProductService productService;
+
+    @MockBean
+    private CategoryService categoryService;
 
     @Test
     @DisplayName("'/products'를 요청하여 메뉴 정보들을 응답받는다")
     public void products() throws Exception {
         // given
         String url = "/products";
-        // when
-        String json = mockMvc.perform(get(url))
-            .andExpect(status().isOk())
-            .andReturn().getResponse().getContentAsString(UTF_8);
-        // then
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<ProductCategoryResponse> products = objectMapper.readValue(json, new TypeReference<>() {
-        });
-        SoftAssertions.assertSoftly(softAssertions -> {
-            // 카테고리 개수 테스트
-            softAssertions.assertThat(products.size()).isEqualTo(5);
+        Product product = Product.builder()
+            .id(1L)
+            .name("아메리카노")
+            .price(4000L)
+            .imageUrl("path")
+            .isBest(false)
+            .hasHot(true)
+            .hasIce(true)
+            .hasLarge(true)
+            .hasSmall(true)
+            .category(Category.builder().id(1L).categoryType(COFFEE).build())
+            .build();
+        List<ProductDto> productDtoList = new ArrayList<>(List.of(new ProductDto(product)));
+        // mocking
+        when(productService.findAll()).thenReturn(productDtoList);
+        when(categoryService.findAll()).thenReturn(List.of(new Category(1L, COFFEE)));
+        // when & then
+        String expectByCategoryName = "$[%s].categoryName";
+        String expectByCategoryId = "$[%s].categoryId";
+        String expectByProducts = "$[%s].products[%s]";
+        String expectByProductId = expectByProducts + ".productId";
+        String expectByName = expectByProducts + ".name";
+        String expectByPrice = expectByProducts + ".price";
+        String expectByImgUrl = expectByProducts + ".imgUrl";
+        String expectByHasHot = expectByProducts + ".hasHot";
+        String expectByHasIce = expectByProducts + ".hasIce";
+        String expectByHasLarge = expectByProducts + ".hasLarge";
+        String expectByHasSmall = expectByProducts + ".hasSmall";
+        String expectByProductCategoryId = expectByProducts + ".categoryId";
+        String expectByIsBest = expectByProducts + ".isBest";
 
-            // 카테고리 테스트
-            List<String> categoryNames = products.stream()
-                .map(ProductCategoryResponse::getCategoryName)
-                .collect(Collectors.toUnmodifiableList());
-            softAssertions.assertThat(categoryNames.contains(COFFEE.name())).isTrue();
-            softAssertions.assertThat(categoryNames.contains(LATTE.name())).isTrue();
-            softAssertions.assertThat(categoryNames.contains(TEA.name())).isTrue();
-            softAssertions.assertThat(categoryNames.contains(JUICE.name())).isTrue();
-            softAssertions.assertThat(categoryNames.contains(SPARKLING.name())).isTrue();
-        });
+        mockMvc.perform(get(url)
+                .contentType(APPLICATION_JSON))
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(jsonPath(expectByCategoryName, 0).value(equalTo(COFFEE.name())))
+            .andExpect(jsonPath(expectByCategoryId, 0).value(equalTo(1)))
+            .andExpect(jsonPath(expectByProductId, 0, 0).value(equalTo(1)))
+            .andExpect(jsonPath(expectByName, 0, 0).value("아메리카노"))
+            .andExpect(jsonPath(expectByPrice, 0, 0).value(4000))
+            .andExpect(jsonPath(expectByImgUrl, 0, 0).value("path"))
+            .andExpect(jsonPath(expectByHasHot, 0, 0).value(true))
+            .andExpect(jsonPath(expectByHasIce, 0, 0).value(true))
+            .andExpect(jsonPath(expectByHasLarge, 0, 0).value(true))
+            .andExpect(jsonPath(expectByHasSmall, 0, 0).value(true))
+            .andExpect(jsonPath(expectByProductCategoryId, 0, 0).value(1))
+            .andExpect(jsonPath(expectByIsBest, 0, 0).value(false));
     }
 }
