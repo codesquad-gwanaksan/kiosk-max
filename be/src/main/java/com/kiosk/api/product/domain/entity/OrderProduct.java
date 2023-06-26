@@ -7,8 +7,8 @@ import lombok.Getter;
 @Getter
 public class OrderProduct {
     private Long orderProductCnt;
-    private String ProductSize;
-    private String ProductTemperature;
+    private String productSize;
+    private String productTemperature;
     private Long orderProductId;
     private Long orderId;
     private Long productId;
