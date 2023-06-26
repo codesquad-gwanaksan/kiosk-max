@@ -1,10 +1,10 @@
 package com.kiosk.domain.repository;
 
-import static com.kiosk.domain.entity.CategoryType.*;
-
-import com.kiosk.domain.entity.Category;
-import com.kiosk.domain.entity.Product;
-import com.kiosk.web.controller.dto.ProductDto;
+import com.kiosk.api.product.domain.entity.Category;
+import com.kiosk.api.product.domain.entity.Product;
+import com.kiosk.api.product.domain.repository.MemoryProductRepository;
+import com.kiosk.api.product.domain.repository.ProductRepository;
+import com.kiosk.api.product.web.controller.dto.ProductDto;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
