@@ -1,6 +1,6 @@
-package com.kiosk.api.product.web.controller.dto;
+package com.kiosk.api.order.domain.dto;
 
-import com.kiosk.api.product.domain.entity.OrderProduct;
+import com.kiosk.api.order.domain.entity.OrderProduct;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public class OrderProductResponseDto {
     private Long orderProductId;
-    private Long orderProductCnt;
+    private Integer orderProductCnt;
     private Long productId;
 
 
@@ -16,7 +16,7 @@ public class OrderProductResponseDto {
      public OrderProduct toEntity() {
             return OrderProduct.builder()
                     .orderProductId(orderProductId)
-                    .orderProductCnt(orderProductCnt)
+                    .cnt(orderProductCnt)
                     .productId(productId)
                     .build();
      }

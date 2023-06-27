@@ -1,4 +1,4 @@
-package com.kiosk.api.product.domain.entity;
+package com.kiosk.api.order.domain.entity;
 
 import lombok.Builder;
 import lombok.Getter;

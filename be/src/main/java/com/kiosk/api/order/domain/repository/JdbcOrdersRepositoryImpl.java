@@ -1,4 +1,4 @@
-package com.kiosk.api.product.domain.repository;
+package com.kiosk.api.order.domain.repository;
 
 import org.springframework.stereotype.Repository;
 
