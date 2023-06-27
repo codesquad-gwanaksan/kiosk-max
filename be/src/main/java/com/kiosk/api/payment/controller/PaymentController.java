@@ -27,7 +27,7 @@ public class PaymentController {
     }
 
     @PostMapping("/api/payment/cash")
-    public Payment payByCash(@RequestBody final PayByCashInDto payByCashInDto) {
+    public Map<String, Long> payByCash(@RequestBody final PayByCashInDto payByCashInDto) {
         // TODO: 주문 만들기
         Long orderId = 0L;
 
@@ -41,11 +41,13 @@ public class PaymentController {
 
         // TODO: 영수증 저장하기
 
-        return payment;
+        // TODO: 무늬만 DTO -> 나중에 공용 ResponseDTO 에 넣기
+        Map<String, Long> payByCashOutDto = Map.of("orderId", orderId);
+        return payByCashOutDto;
     }
 
     @PostMapping("/api/payment/card")
-    public Payment payByCard(@RequestBody final PayByCardInDto payByCardInDto) {
+    public Map<String, Long> payByCard(@RequestBody final PayByCardInDto payByCardInDto) {
         // TODO: 주문 만들기
         Long orderId = 0L;
 
@@ -59,7 +61,9 @@ public class PaymentController {
 
         // TODO: 영수증 저장하기
 
-        return payment;
+        // TODO: 무늬만 DTO -> 나중에 공용 ResponseDTO 에 넣기
+        Map<String, Long> payByCardOutDto = Map.of("orderId", orderId);
+        return payByCardOutDto;
     }
 
     private void saveOrderProductsWithOrderId(final Long orderId, final List<CartInDto> orderProducts) {
