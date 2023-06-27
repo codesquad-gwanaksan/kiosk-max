@@ -53,9 +53,9 @@ public class PaymentRepositoryImpl implements PaymentRepository {
     private RowMapper<Payment> rowMapper() {
         return (rs, rn) -> Payment.builder()
                 .orderId(rs.getLong("order_id"))
-                .totalAmount(rs.getLong("payment_total_amount"))
-                .receivedAmount(rs.getLong("payment_received_amount"))
-                .change(rs.getLong("payment_change"))
+                .totalPrice(rs.getInt("payment_total_amount"))
+                .receivedAmount(rs.getInt("payment_received_amount"))
+                .change(rs.getInt("payment_change"))
                 .method(PaymentMethod.from(rs.getString("payment_method")))
                 .build();
     }

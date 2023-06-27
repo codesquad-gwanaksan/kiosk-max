@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @Getter
 public class Payment {
-    private Long id;
+    private Long paymentId;
     private Long orderId;
-    private Long totalAmount;
-    private Long receivedAmount;
-    private Long change;
-    private PaymentMethod paymentMethod;
+    private Integer totalPrice;
+    private Integer receivedAmount;
+    private Integer change;
+    private PaymentMethod method;
 }
