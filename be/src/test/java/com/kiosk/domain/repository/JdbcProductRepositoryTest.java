@@ -70,6 +70,7 @@ class JdbcProductRepositoryTest {
         // then
         SoftAssertions.assertSoftly(softAssertions -> {
             softAssertions.assertThat(products.size()).isEqualTo(25);
+            softAssertions.assertAll();
         });
     }
 }
