@@ -1,9 +1,12 @@
 package com.kiosk.api.order.domain.entity;
 
-import java.time.LocalDateTime;
+import lombok.Builder;
+import lombok.Getter;
 
+@Getter
+@Builder
 public class Orders {
     private Long orderId;
     private Long orderNumber;
-    private LocalDateTime orderTime;
+    private String orderDateTime;
 }
