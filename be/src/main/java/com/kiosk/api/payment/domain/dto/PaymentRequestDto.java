@@ -64,14 +64,14 @@ public class PaymentRequestDto {
     public static class CartInDto {
         private Long productId;
         private String name;
-        private Integer cnt;
+        private Integer amount;
         private String size;
         private String temperature;
 
         public OrderProduct toEntity(Long orderId) {
             return OrderProduct.builder()
                     .orderId(orderId)
-                    .amount(this.cnt)
+                    .amount(this.amount)
                     .productId(this.productId)
                     .name(this.name)
                     .size(this.size)
