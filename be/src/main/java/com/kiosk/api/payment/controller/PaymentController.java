@@ -1,8 +1,5 @@
 package com.kiosk.api.payment.controller;
 
-import com.kiosk.api.order.domain.entity.OrderProduct;
-import com.kiosk.api.order.domain.repository.OrderProductRepository;
-import com.kiosk.api.payment.domain.dto.PaymentRequestDto.CartInDto;
 import com.kiosk.api.payment.domain.dto.PaymentRequestDto.PayByCardInDto;
 import com.kiosk.api.payment.domain.dto.PaymentRequestDto.PayByCashInDto;
 import com.kiosk.api.payment.domain.dto.PaymentResponseDto;
@@ -16,11 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Map;
 
-@Transactional
 @RestController
+@RequiredArgsConstructor
 public class PaymentController {
 
     private final PaymentRepository paymentRepository;
