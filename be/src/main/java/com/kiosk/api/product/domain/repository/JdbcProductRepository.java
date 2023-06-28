@@ -3,13 +3,17 @@ package com.kiosk.api.product.domain.repository;
 import com.kiosk.api.product.domain.entity.Category;
 import com.kiosk.api.product.domain.entity.Product;
 import com.kiosk.api.product.web.controller.dto.ProductDto;
+
 import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -87,5 +91,22 @@ public class JdbcProductRepository implements ProductRepository {
                 .category(category)
                 .build();
         };
+    }
+
+
+    @Override
+    public void updateBestProducts(List<Product> bestProducts) {
+        for (Product bestProduct : bestProducts) {
+            updateBestProduct(bestProduct);
+        }
+    }
+
+    private void updateBestProduct(Product bestProduct) {
+        String sql = "UPDATE product SET product_is_best = (IF(product_id = :productId, true, false)) WHERE product_id = :productId";
+
+        SqlParameterSource param = new MapSqlParameterSource()
+                .addValue("productId", bestProduct.getId());
+
+        template.update(sql, param);
     }
 }
