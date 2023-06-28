@@ -68,7 +68,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
     @Override
     public Optional<Payment> findByOrderId(Long orderId) {
         String sql =
-            "SELECT order_id, payment_total_price, payment_received_price, payment_remained_price, payment_method "
+            "SELECT payment_id, order_id, payment_total_price, payment_received_price, payment_remained_price, payment_method "
                 + "FROM payment "
                 + "WHERE order_id = :orderId";
 
