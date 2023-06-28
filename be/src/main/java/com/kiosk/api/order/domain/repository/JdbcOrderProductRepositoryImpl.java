@@ -23,8 +23,8 @@ public class JdbcOrderProductRepositoryImpl implements OrderProductRepository {
 
     @Override
     public Long save(OrderProduct orderProduct) {
-        String sql = "INSERT INTO order_product (order_product_name, order_product_cnt, order_product_size, order_product_temperature, order_id, product_id) "
-                + "values (:name, :cnt, :size, :temperature, :orderId, :productId)";
+        String sql = "INSERT INTO order_product (order_product_name, order_product_amount, order_product_size, order_product_temperature, order_id, product_id) "
+                + "values (:name, :amount, :size, :temperature, :orderId, :productId)";
         SqlParameterSource param = new BeanPropertySqlParameterSource(orderProduct);
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -34,7 +34,7 @@ public class JdbcOrderProductRepositoryImpl implements OrderProductRepository {
 
     @Override
     public List<OrderProduct> findAllBy(Long orderId) {
-        String sql = "SELECT order_product_name, order_product_size, order_product_temperature, order_product_cnt "
+        String sql = "SELECT order_product_name, order_product_size, order_product_temperature, order_product_amount "
                 + "FROM order_product "
                 + "WHERE order_id = :orderId";
         SqlParameterSource param = new MapSqlParameterSource("orderId", orderId);
@@ -44,7 +44,7 @@ public class JdbcOrderProductRepositoryImpl implements OrderProductRepository {
     private RowMapper<OrderProduct> orderProductRowMapper() {
         return (resultSet, rowNumber) -> OrderProduct.builder()
                     .name(resultSet.getString("order_product_name"))
-                    .cnt(resultSet.getInt("order_product_cnt"))
+                    .amount(resultSet.getInt("order_product_amount"))
                     .size(resultSet.getString("order_product_size"))
                     .temperature(resultSet.getString("order_product_temperature"))
                     .build();
