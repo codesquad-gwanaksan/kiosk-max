@@ -5,10 +5,8 @@ import static java.nio.charset.StandardCharsets.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
@@ -18,18 +16,16 @@ import com.kiosk.api.product.domain.entity.Product;
 import com.kiosk.api.product.web.controller.dto.ProductDto;
 import com.kiosk.api.product.web.service.CategoryService;
 import com.kiosk.api.product.web.service.ProductService;
-import java.nio.charset.StandardCharsets;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 
@@ -60,7 +56,7 @@ class ProductControllerTest {
             .id(1L)
             .name("아메리카노")
             .price(4000L)
-            .imageUrl("path")
+            .imgUrl("path")
             .isBest(false)
             .hasHot(true)
             .hasIce(true)

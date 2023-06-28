@@ -31,7 +31,7 @@ public class ProductDto {
         this.productId = product.getId();
         this.name = product.getName();
         this.price = product.getPrice();
-        this.imgUrl = product.getImageUrl();
+        this.imgUrl = product.getImgUrl();
         this.isBest = product.isBest();
         this.hasHot = product.isHasHot();
         this.hasIce = product.isHasIce();
@@ -45,7 +45,7 @@ public class ProductDto {
             .id(productId)
             .name(name)
             .price(price)
-            .imageUrl(imgUrl)
+            .imgUrl(imgUrl)
             .isBest(isBest)
             .hasHot(hasHot)
             .hasIce(hasIce)
