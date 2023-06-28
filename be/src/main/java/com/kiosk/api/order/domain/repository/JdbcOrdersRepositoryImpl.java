@@ -34,4 +34,19 @@ public class JdbcOrdersRepositoryImpl implements OrdersRepository {
                 .orderDateTime(rs.getString("order_datetime"))
                 .build();
     }
+
+    @Override
+    public Long findSequence(String name) {
+        String query = "SELECT value FROM sequence WHERE name = :name";
+        SqlParameterSource param = new MapSqlParameterSource("name", name);
+        Long sequenceValue = template.queryForObject(query, param, Long.class);
+        return sequenceValue != null ? sequenceValue : null;
+    }
+
+    @Override
+    public void updateSequence(Long value, String name) {
+        String query = "UPDATE sequence SET value = :value WHERE name = :name";
+        SqlParameterSource param = new MapSqlParameterSource("sequence", value);
+        template.update(query, param);
+    }
 }
