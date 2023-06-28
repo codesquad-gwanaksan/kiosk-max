@@ -27,6 +27,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
     public Long save(Payment payment) {
         String sql = "INSERT INTO payment (order_id, payment_total_price, payment_received_price, payment_remained_price, payment_method) "
                 + "values (:orderId, :totalPrice, :receivedPrice, :remainedPrice, :method)";
+
         SqlParameterSource param = new BeanPropertySqlParameterSource(payment);
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
