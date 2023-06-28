@@ -28,7 +28,7 @@ public class PaymentRequestDto {
                     .orderId(orderId)
                     .totalPrice(this.totalPrice)
                     .receivedPrice(this.receivedPrice)
-                    .change(calculateChange(this.totalPrice, this.receivedPrice))
+                    .remainedPrice(calculateChange(this.totalPrice, this.receivedPrice))
                     .method(CASH)
                     .build();
         }
@@ -47,7 +47,7 @@ public class PaymentRequestDto {
                     .orderId(orderId)
                     .totalPrice(this.totalPrice)
                     .receivedPrice(this.totalPrice)
-                    .change(ZERO)
+                    .remainedPrice(ZERO)
                     .method(CARD)
                     .build();
         }

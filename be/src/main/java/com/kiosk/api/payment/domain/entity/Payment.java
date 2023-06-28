@@ -15,5 +15,5 @@ public class Payment {
     private Integer totalPrice;
     private Integer receivedPrice;
     private Integer remainedPrice;
-    private PaymentMethod paymentMethod;
+    private PaymentMethod method;
 }

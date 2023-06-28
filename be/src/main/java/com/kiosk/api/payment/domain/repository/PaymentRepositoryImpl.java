@@ -57,7 +57,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
                 .totalPrice(rs.getInt("payment_total_price"))
                 .receivedPrice(rs.getInt("payment_received_price"))
                 .remainedPrice(rs.getInt("payment_remained_price"))
-                .paymentMethod(PaymentMethod.from(rs.getString("payment_method")))
+                .method(PaymentMethod.from(rs.getString("payment_method")))
                 .build();
     }
 }
