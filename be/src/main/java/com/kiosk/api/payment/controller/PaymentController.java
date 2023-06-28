@@ -1,8 +1,5 @@
 package com.kiosk.api.payment.controller;
 
-import com.kiosk.api.order.domain.entity.OrderProduct;
-import com.kiosk.api.order.domain.repository.OrderProductRepository;
-import com.kiosk.api.payment.domain.dto.PaymentRequestDto.CartInDto;
 import com.kiosk.api.payment.domain.dto.PaymentRequestDto.PayByCardInDto;
 import com.kiosk.api.payment.domain.dto.PaymentRequestDto.PayByCashInDto;
 import com.kiosk.api.payment.domain.dto.PaymentResultResponseDto;
