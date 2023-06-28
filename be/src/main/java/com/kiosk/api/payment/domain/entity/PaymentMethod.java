@@ -1,7 +1,13 @@
 package com.kiosk.api.payment.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public enum PaymentMethod {
-    CARD, CASH;
+
+    @JsonProperty("card")
+    CARD,
+    @JsonProperty("cash")
+    CASH;
 
     public static PaymentMethod from(String value) {
         for (PaymentMethod paymentMethod : values()) {
