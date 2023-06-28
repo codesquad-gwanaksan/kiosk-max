@@ -25,8 +25,8 @@ public class PaymentRepositoryImpl implements PaymentRepository {
 
     @Override
     public Long save(Payment payment) {
-        String sql = "INSERT INTO payment (order_id, payment_total_amount, payment_received_amount, payment_change, payment_method) "
-                + "values (:orderId, :totalAmount, :receivedAmount, :change, :method)";
+        String sql = "INSERT INTO payment (order_id, payment_total_price, payment_received_price, payment_remained_price, payment_method) "
+                + "values (:orderId, :totalPrice, :receivedPrice, :remainedPrice, :method)";
         SqlParameterSource param = new BeanPropertySqlParameterSource(payment);
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -37,8 +37,8 @@ public class PaymentRepositoryImpl implements PaymentRepository {
 
     // 1:1 이니까 1개만 가져오고 싶은데
     @Override
-    public Optional<Payment> findByOrderId(Long orderId) {
-        String sql = "SELECT order_id, payment_total_amount, payment_received_amount, payment_change, payment_method "
+    public Optional<Payment> findBy(Long orderId) {
+        String sql = "SELECT order_id, payment_total_price, payment_received_price, payment_remained_price, payment_method "
                 + "FROM payment "
                 + "WHERE order_id = :orderId";
 
@@ -53,10 +53,10 @@ public class PaymentRepositoryImpl implements PaymentRepository {
     private RowMapper<Payment> rowMapper() {
         return (rs, rn) -> Payment.builder()
                 .orderId(rs.getLong("order_id"))
-                .totalPrice(rs.getInt("payment_total_amount"))
-                .receivedAmount(rs.getInt("payment_received_amount"))
-                .change(rs.getInt("payment_change"))
-                .method(PaymentMethod.from(rs.getString("payment_method")))
+                .totalPrice(rs.getInt("payment_total_price"))
+                .receivedAmount(rs.getInt("payment_received_price"))
+                .remainedPrice(rs.getInt("payment_remained_price"))
+                .paymentMethod(PaymentMethod.from(rs.getString("payment_method")))
                 .build();
     }
 }
