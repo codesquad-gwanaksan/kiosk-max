@@ -11,7 +11,7 @@ public class OrderProduct {
     private Long productId;
 
     private String name;
-    private Integer cnt;
+    private Integer amount;
     private String size;
     private String temperature;
 }

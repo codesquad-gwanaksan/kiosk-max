@@ -1,16 +1,14 @@
 package com.kiosk.api.payment.domain.dto;
 
-import com.kiosk.api.order.domain.entity.OrderProduct;
-import com.kiosk.api.payment.domain.entity.Payment;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
-
-import java.util.List;
-
 import static com.kiosk.api.payment.domain.entity.PaymentMethod.CARD;
 import static com.kiosk.api.payment.domain.entity.PaymentMethod.CASH;
 
+import com.kiosk.api.order.domain.entity.OrderProduct;
+import com.kiosk.api.payment.domain.entity.Payment;
+import java.util.List;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
 
 public class PaymentRequestDto {
     @Getter
@@ -66,14 +64,14 @@ public class PaymentRequestDto {
     public static class CartInDto {
         private Long productId;
         private String name;
-        private Integer cnt;
+        private Integer amount;
         private String size;
         private String temperature;
 
         public OrderProduct toEntity(Long orderId) {
             return OrderProduct.builder()
                     .orderId(orderId)
-                    .cnt(this.cnt)
+                    .amount(this.amount)
                     .productId(this.productId)
                     .name(this.name)
                     .size(this.size)
