@@ -1,19 +1,22 @@
 package com.kiosk.api.payment.controller;
 
+import com.kiosk.api.order.domain.entity.OrderProduct;
+import com.kiosk.api.order.domain.repository.OrderProductRepository;
+import com.kiosk.api.payment.domain.dto.PaymentRequestDto.CartInDto;
 import com.kiosk.api.payment.domain.dto.PaymentRequestDto.PayByCardInDto;
 import com.kiosk.api.payment.domain.dto.PaymentRequestDto.PayByCashInDto;
-import com.kiosk.api.payment.domain.dto.PaymentResponseDto;
 import com.kiosk.api.payment.domain.dto.PaymentResultResponseDto;
 import com.kiosk.api.payment.domain.entity.Payment;
 import com.kiosk.api.payment.domain.repository.PaymentRepository;
-import java.util.HashMap;
-import java.util.Objects;
-import org.springframework.transaction.annotation.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,17 +25,12 @@ public class PaymentController {
     private final PaymentRepository paymentRepository;
     private final OrderProductRepository orderProductRepository;
 
-    public PaymentController(final PaymentRepository paymentRepository,
-        final OrderProductRepository orderProductRepository) {
-        this.paymentRepository = paymentRepository;
-        this.orderProductRepository = orderProductRepository;
-    }
-
     @PostMapping("/api/payment/cash")
-    public PaymentResultResponseDto payByCash(@RequestBody final PayByCashInDto payByCashInDto, Long fail) {
+    public PaymentResultResponseDto payByCash(@RequestBody final PayByCashInDto payByCashInDto, final Long fail) {
         if (Objects.equals(fail, 400L)) {
             return handle400();
         }
+
         if (Objects.equals(fail, 500L)) {
             return handle500();
         }
@@ -53,10 +51,11 @@ public class PaymentController {
     }
 
     @PostMapping("/api/payment/card")
-    public PaymentResultResponseDto payByCard(@RequestBody final PayByCardInDto payByCardInDto, Long fail) {
+    public PaymentResultResponseDto payByCard(@RequestBody final PayByCardInDto payByCardInDto, final Long fail) {
         if (Objects.equals(fail, 400L)) {
             return handle400();
         }
+
         if (Objects.equals(fail, 500L)) {
             return handle500();
         }
@@ -110,6 +109,4 @@ public class PaymentController {
         errorCode.put("message", "서버 에러입니다. 잠시 후에 이용해주세요.");
         return new PaymentResultResponseDto(false, data, errorCode);
     }
-
-
 }
