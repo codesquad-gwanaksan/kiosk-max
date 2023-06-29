@@ -50,21 +50,32 @@ public class OrderLogService {
         Map<Long, Long> highestSalesAmountByCategory = new HashMap<>();
         Map<Long, List<Long>> highestProductIdByCategory = new HashMap<>();
 
-        // 카테고리별로 가장 높은 salesAmount를 찾음
-        for (OrderLog orderLog : orderLogList) {
-            Long categoryId = orderLog.getCategoryId();
-            Long salesAmount = orderLog.getSalesAmount();
-
-            if (!highestSalesAmountByCategory.containsKey(categoryId) ||
-                    salesAmount > highestSalesAmountByCategory.get(categoryId)) {
-                highestSalesAmountByCategory.put(categoryId, salesAmount);
-            }
-        }
+        findSalesAmountByCategory(orderLogList, highestSalesAmountByCategory);
 
         // 모든 Product 레코드를 가져옴
         List<Product> products = productRepository.findAll();
 
+        // 필요한 필드를 설정하여 결과 리스트에 추가
+        List<Long> highestProductIds = findProductIdBySalesAmount(orderLogList, highestSalesAmountByCategory);
+
         // 가장 높은 salesAmount를 갖는 productId들을 모두 찾음
+        return addResultListToSetField(products, highestProductIds);
+    }
+
+    private List<Product> addResultListToSetField(List<Product> products, List<Long> highestProductIds) {
+        List<Product> result = new ArrayList<>();
+        for (Product product : products) {
+            // productId가 가장 높은 salesAmount를 갖는지 확인
+            if (highestProductIds.contains(product.getId())) {
+                // 필요한 필드를 설정
+                //product.setBest(true);  // 예시로 isBest 필드를 true로 설정
+                result.add(product);
+            }
+        }
+        return result;
+    }
+
+    private List<Long> findProductIdBySalesAmount(List<OrderLog> orderLogList, Map<Long, Long> highestSalesAmountByCategory) {
         List<Long> highestProductIds = new ArrayList<>();
         for (OrderLog orderLog : orderLogList) {
             Long categoryId = orderLog.getCategoryId();
@@ -75,20 +86,20 @@ public class OrderLogService {
                 highestProductIds.add(productId);
             }
         }
+        return highestProductIds;
+    }
 
-        // 필요한 필드를 설정하여 결과 리스트에 추가
-        List<Product> result = new ArrayList<>();
-        for (Product product : products) {
-            // productId가 가장 높은 salesAmount를 갖는지 확인
-            if (highestProductIds.contains(product.getId())) {
-                // 필요한 필드를 설정
-                //product.setBest(true);  // 예시로 isBest 필드를 true로 설정
-                result.add(product);
+    private void findSalesAmountByCategory(List<OrderLog> orderLogList, Map<Long, Long> highestSalesAmountByCategory) {
+        // 카테고리별로 가장 높은 salesAmount를 찾음
+        for (OrderLog orderLog : orderLogList) {
+            Long categoryId = orderLog.getCategoryId();
+            Long salesAmount = orderLog.getSalesAmount();
+
+            if (!highestSalesAmountByCategory.containsKey(categoryId) ||
+                    salesAmount > highestSalesAmountByCategory.get(categoryId)) {
+                highestSalesAmountByCategory.put(categoryId, salesAmount);
             }
         }
-
-        return result;
-
     }
 }
 
