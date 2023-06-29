@@ -1,9 +1,7 @@
 package com.kiosk.api.order.domain.repository;
 
-import com.kiosk.api.order.domain.entity.OrderProduct;
 import com.kiosk.api.order.domain.entity.Orders;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -50,17 +48,22 @@ public class JdbcOrdersRepositoryImpl implements OrdersRepository {
     @Override
     public Integer save(Orders orders) {
         orders.setOrderNumber(orderNumber++);
+
         String sql = "INSERT INTO orders (order_id, order_number, order_datetime) "
             + "values (:orderId, :orderNumber, :orderDatetime)";
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
 
         SqlParameterSource param =
             new MapSqlParameterSource("orders", orders)
                 .addValue("orderId", orders.getOrderId())
                 .addValue("orderNumber", orders.getOrderNumber())
                 .addValue("orderDatetime", orders.getOrderDateTime());
-        return template.update(sql, param);
-    }
 
+        template.update(sql, param, keyHolder);
+
+        return Objects.requireNonNull(keyHolder.getKey()).intValue();
+    }
 
     @Override
     public Optional<Orders> findBy(Long orderId) {

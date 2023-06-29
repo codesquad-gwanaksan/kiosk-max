@@ -1,8 +1,8 @@
 package com.kiosk.api.product.domain.repository;
 
+import com.kiosk.api.product.controller.dto.ProductDto;
 import com.kiosk.api.product.domain.entity.Category;
 import com.kiosk.api.product.domain.entity.Product;
-import com.kiosk.api.product.web.controller.dto.ProductDto;
 
 import java.sql.PreparedStatement;
 import java.util.List;
@@ -12,8 +12,6 @@ import java.util.Optional;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
