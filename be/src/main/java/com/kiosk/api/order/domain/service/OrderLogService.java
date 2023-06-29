@@ -42,7 +42,7 @@ public class OrderLogService {
         productRepository.updateBestProducts(bestProducts);
 
         // orderNumber 시퀀스 초기화
-        ordersRepository.updateSequence(1L, "orderNumber");
+//        ordersRepository.updateSequence(1L, "orderNumber");
     }
 
 
@@ -75,7 +75,8 @@ public class OrderLogService {
         return result;
     }
 
-    private List<Long> findProductIdBySalesAmount(List<OrderLog> orderLogList, Map<Long, Long> highestSalesAmountByCategory) {
+    private List<Long> findProductIdBySalesAmount(List<OrderLog> orderLogList,
+        Map<Long, Long> highestSalesAmountByCategory) {
         List<Long> highestProductIds = new ArrayList<>();
         for (OrderLog orderLog : orderLogList) {
             Long categoryId = orderLog.getCategoryId();
@@ -96,7 +97,7 @@ public class OrderLogService {
             Long salesAmount = orderLog.getSalesAmount();
 
             if (!highestSalesAmountByCategory.containsKey(categoryId) ||
-                    salesAmount > highestSalesAmountByCategory.get(categoryId)) {
+                salesAmount > highestSalesAmountByCategory.get(categoryId)) {
                 highestSalesAmountByCategory.put(categoryId, salesAmount);
             }
         }

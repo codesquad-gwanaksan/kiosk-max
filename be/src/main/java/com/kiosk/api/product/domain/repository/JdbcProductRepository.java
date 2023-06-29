@@ -78,7 +78,7 @@ public class JdbcProductRepository implements ProductRepository {
                 .id(rs.getLong("product_id"))
                 .name(rs.getString("product_name"))
                 .price(rs.getLong("product_price"))
-                .imageUrl(rs.getString("product_img_url"))
+                .imgUrl(rs.getString("product_img_url"))
                 .isBest(rs.getBoolean("product_is_best"))
                 .hasHot(rs.getBoolean("product_has_hot"))
                 .hasIce(rs.getBoolean("product_has_ice"))
@@ -88,4 +88,24 @@ public class JdbcProductRepository implements ProductRepository {
                 .build();
         };
     }
+
+    @Override
+    public void updateBestProducts(List<Product> bestProducts) {
+        // 모든 제품들의 isBest 컬럼값을 false로 갱신합니다.
+        updateAllFlaseForIsBest();
+        for (Product bestProduct : bestProducts) {
+            updateBestProduct(bestProduct);
+        }
+    }
+
+    private void updateAllFlaseForIsBest() {
+        String sql = "UPDATE product SET product_is_best = false";
+        template.update(sql);
+    }
+
+    private void updateBestProduct(Product bestProduct) {
+        String sql = "UPDATE product SET product_is_best = true WHERE product_id = ?";
+        template.update(sql, bestProduct.getId());
+    }
+
 }
