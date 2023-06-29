@@ -23,21 +23,20 @@ public class ReceiptResponseDto {
 
     private List<OrderProductResponseDto> orderProducts;
     private PaymentResponseDto payment;
-    private String orderDateTime;
-
+    private String orderDatetime;
 
     public static ReceiptResponseDto from(Receipt receipt) {
         List<OrderProductResponseDto> orderProducts = receipt.getOrderProducts().stream()
-                .map(OrderProductResponseDto::from)
-                .collect(Collectors.toList());
+            .map(OrderProductResponseDto::from)
+            .collect(Collectors.toList());
         PaymentResponseDto payment = PaymentResponseDto.from(receipt.getPayment());
         OrdersResponseDto orders = OrdersResponseDto.from(receipt.getOrders());
         return ReceiptResponseDto.builder()
-                .orderId(receipt.getOrderId())
-                .orderNumber(orders.getOrderNumber())
-                .orderProducts(orderProducts)
-                .payment(payment)
-                .orderDateTime(orders.getOrderDateTime())
-                .build();
+            .orderId(receipt.getOrderId())
+            .orderNumber(orders.getOrderNumber())
+            .orderProducts(orderProducts)
+            .payment(payment)
+            .orderDatetime(orders.getOrderDateTime())
+            .build();
     }
 }

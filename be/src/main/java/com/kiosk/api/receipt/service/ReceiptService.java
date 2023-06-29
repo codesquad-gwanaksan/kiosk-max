@@ -26,7 +26,7 @@ public class ReceiptService {
 
     public Receipt getReceiptInformation(Long orderId) {
         List<OrderProduct> products = orderProductRepository.findAllBy(orderId);
-        Payment payment = paymentRepository.findBy(orderId).orElseThrow(); // TODO: 예외처리
+        Payment payment = paymentRepository.findByOrderId(orderId).orElseThrow(); // TODO: 예외처리
         Orders orders = ordersRepository.findBy(orderId).orElseThrow();
         return new Receipt(orderId, products, payment, orders);
     }
