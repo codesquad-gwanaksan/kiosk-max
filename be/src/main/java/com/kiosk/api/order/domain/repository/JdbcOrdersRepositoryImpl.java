@@ -1,5 +1,6 @@
 package com.kiosk.api.order.domain.repository;
 
+import com.kiosk.api.order.domain.entity.OrderProduct;
 import com.kiosk.api.order.domain.entity.Orders;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
