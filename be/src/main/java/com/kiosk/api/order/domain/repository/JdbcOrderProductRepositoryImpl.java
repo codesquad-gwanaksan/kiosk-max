@@ -68,10 +68,10 @@ public class JdbcOrderProductRepositoryImpl implements OrderProductRepository {
 
         SqlParameterSource param = new MapSqlParameterSource("date", date.toString());
 
-        return template.query(sql, param, rowMapper(date));
+        return template.query(sql, param, rowMapper());
     }
 
-    private RowMapper<OrderLog> rowMapper(LocalDate date) {
+    private RowMapper<OrderLog> rowMapper() {
         return (rs, rowNum) -> OrderLog.builder()
             .productId(rs.getLong("product_id"))
             .categoryId(rs.getLong("category_id"))
