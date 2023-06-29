@@ -13,4 +13,6 @@ public interface ProductRepository {
     Optional<Product> findBy(Long id);
 
     int deleteAll();
+
+    void updateBestProducts(List<Product> bestProducts);
 }

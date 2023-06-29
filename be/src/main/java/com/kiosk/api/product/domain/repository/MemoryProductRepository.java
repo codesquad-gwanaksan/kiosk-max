@@ -39,6 +39,9 @@ public class MemoryProductRepository implements ProductRepository {
         return delSize;
     }
 
+    @Override
+    public void updateBestProducts(List<Product> bestProducts) {}
+
     public synchronized static Long nextId() {
         return ++sequence;
     }

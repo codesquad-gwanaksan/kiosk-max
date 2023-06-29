@@ -43,7 +43,7 @@ class JdbcProductRepositoryTest {
         Product product = Product.builder()
             .name("에스프레소")
             .price(4000L)
-            .imageUrl("imageUrl")
+            .imgUrl("imageUrl")
             .isBest(false)
             .hasHot(true)
             .hasIce(true)

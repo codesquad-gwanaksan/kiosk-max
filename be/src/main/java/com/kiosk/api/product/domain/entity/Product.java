@@ -16,7 +16,7 @@ public class Product {
     private Long id;            // 상품 아이디
     private String name;        // 이름
     private Long price;         // 가격
-    private String imageUrl;       // 이미지 저장 경로
+    private String imgUrl;       // 이미지 저장 경로
     private boolean isBest;     // 인기 상품
     private boolean hasHot;     // 핫 가능 여부
     private boolean hasIce;     // 아이스 가능 여부
