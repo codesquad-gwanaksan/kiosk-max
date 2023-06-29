@@ -2,11 +2,11 @@ package com.kiosk.api.order.domain.entity;
 
 import lombok.Builder;
 import lombok.Getter;
-
-import java.time.LocalDate;
+import lombok.ToString;
 
 @Builder
 @Getter
+@ToString
 public class OrderLog {
     private String salesDate;
     private Long categoryId;
