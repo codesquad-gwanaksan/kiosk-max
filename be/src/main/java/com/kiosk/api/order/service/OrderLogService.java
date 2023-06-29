@@ -1,4 +1,4 @@
-package com.kiosk.api.order.domain.service;
+package com.kiosk.api.order.service;
 
 import com.kiosk.api.order.domain.entity.OrderLog;
 import com.kiosk.api.order.domain.repository.OrderLogRepository;

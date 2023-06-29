@@ -3,7 +3,6 @@ package com.kiosk.domain.repository;
 import static com.kiosk.api.product.domain.entity.CategoryType.*;
 
 import com.kiosk.api.product.domain.entity.Category;
-import com.kiosk.api.product.domain.entity.CategoryType;
 import com.kiosk.api.product.domain.entity.Product;
 import com.kiosk.api.product.domain.repository.MemoryProductRepository;
 import com.kiosk.api.product.domain.repository.ProductRepository;

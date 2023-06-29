@@ -1,4 +1,4 @@
-package com.kiosk.api.product.web.service;
+package com.kiosk.api.product.service;
 
 import com.kiosk.api.product.domain.repository.ProductRepository;
 import com.kiosk.api.product.web.controller.dto.ProductDto;

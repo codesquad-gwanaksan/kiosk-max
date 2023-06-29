@@ -1,4 +1,4 @@
-package com.kiosk.api.product.web.service;
+package com.kiosk.api.product.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
