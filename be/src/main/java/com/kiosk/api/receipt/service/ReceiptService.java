@@ -11,18 +11,12 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class ReceiptService {
 
     private final OrderProductRepository orderProductRepository;
     private final PaymentRepository paymentRepository;
     private final OrdersRepository ordersRepository;
-
-    public ReceiptService(OrderProductRepository orderProductRepository, PaymentRepository paymentRepository,
-                          OrdersRepository ordersRepository) {
-        this.orderProductRepository = orderProductRepository;
-        this.paymentRepository = paymentRepository;
-        this.ordersRepository = ordersRepository;
-    }
 
     public Receipt getReceiptInformation(Long orderId) {
         List<OrderProduct> products = orderProductRepository.findAllBy(orderId);
