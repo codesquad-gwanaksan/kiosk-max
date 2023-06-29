@@ -6,6 +6,7 @@ import useOutsideClick from '../../hooks/useOutsideClick';
 import CashPayment from './CashPayment';
 import modalStyles from './Modal.module.css';
 import styles from './PaymentModalContent.module.css';
+import ConfirmModal from './ConfirmModal';
 
 interface PaymentModalContentProps {
   totalPrice: number;
@@ -25,6 +26,7 @@ export default function PaymentModalContent({
   const [receivedPrice, setReceivedPrice] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
 
   const isCardPaymentOption = paymentOption === 'card';
 
@@ -85,13 +87,26 @@ export default function PaymentModalContent({
     setReceivedPrice(receivedPrice + amount);
   };
 
+  const handleCloseConfirmModal = () => {
+    setShowConfirmModal(false);
+  };
+
+  const handleCancelPayment = () => {
+    setShowConfirmModal(false);
+    handlePaymentCancelButtonClick();
+  };
+
+  const handleOpenConfirmModal = () => {
+    setShowConfirmModal(true);
+  };
+
   useOutsideClick(outsideModal, handlePaymentCancelButtonClick);
 
   return (
     <div ref={outsideModal} className={modalStyles.dim}>
       {paymentOption === 'select' && (
         <div className={modalStyles.modalContent}>
-          <button className={modalStyles.closeButton} onClick={handlePaymentCancelButtonClick}>
+          <button className={modalStyles.closeButton} onClick={handleOpenConfirmModal}>
             X
           </button>
           <div className={styles.paymentMethod}>
@@ -119,6 +134,13 @@ export default function PaymentModalContent({
       )}
       {isCardPaymentOption && loading && <LoadingIndicator text="카드 결제중..." />}
       {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>}
+      {showConfirmModal && (
+        <ConfirmModal
+          text={'결제를 취소하시겠습니까?'}
+          onClickYesButton={handleCancelPayment}
+          onClickNoButton={handleCloseConfirmModal}
+        />
+      )}
     </div>
   );
 }
