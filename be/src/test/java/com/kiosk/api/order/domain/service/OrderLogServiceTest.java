@@ -8,11 +8,11 @@ import com.kiosk.api.order.domain.entity.Orders;
 import com.kiosk.api.order.domain.repository.OrderLogRepository;
 import com.kiosk.api.order.domain.repository.OrderProductRepository;
 import com.kiosk.api.order.domain.repository.OrdersRepository;
+import com.kiosk.api.order.service.OrderLogService;
 import com.kiosk.api.payment.domain.entity.Payment;
 import com.kiosk.api.payment.domain.repository.PaymentRepository;
 import com.kiosk.api.product.domain.entity.Product;
 import com.kiosk.api.product.domain.repository.ProductRepository;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +55,7 @@ class OrderLogServiceTest {
         LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
         // 주문 저장
         ordersRepository.save(
-            Orders.builder().orderId(1L).orderNumber(1L).orderDateTime(yesterday.toString()).build());
+            Orders.builder().orderId(1L).orderNumber(1L).orderDatetime(yesterday.toString()).build());
         List<OrderProduct> orderProducts = new ArrayList<>();
         orderProducts.add(
             OrderProduct.builder().orderId(1L).productId(1L).name("아메리카노").amount(1).size("small").temperature("ice")

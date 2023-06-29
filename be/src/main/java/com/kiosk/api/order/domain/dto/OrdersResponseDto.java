@@ -11,13 +11,13 @@ import lombok.Getter;
 public class OrdersResponseDto {
 
     private Long orderId;
-    private String orderDateTime;
+    private String orderDatetime;
     private Long orderNumber;
 
     public static OrdersResponseDto from(Orders orders) {
         return OrdersResponseDto.builder()
                 .orderId(orders.getOrderId())
-                .orderDateTime(orders.getOrderDateTime())
+                .orderDatetime(orders.getOrderDatetime())
                 .orderNumber(orders.getOrderNumber())
                 .build();
     }
