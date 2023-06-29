@@ -2,11 +2,11 @@ package com.kiosk.domain.repository;
 
 import static com.kiosk.api.product.domain.entity.CategoryType.COFFEE;
 
+import com.kiosk.api.product.controller.dto.ProductDto;
 import com.kiosk.api.product.domain.entity.Category;
 import com.kiosk.api.product.domain.entity.Product;
 import com.kiosk.api.product.domain.repository.CategoryRepository;
 import com.kiosk.api.product.domain.repository.ProductRepository;
-import com.kiosk.api.product.web.controller.dto.ProductDto;
 import java.util.List;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;

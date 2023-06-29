@@ -14,10 +14,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class Receipt {
-
-    private Long orderId;
+    private Orders orders;
     private List<OrderProduct> orderProducts;
     private Payment payment;
-    private Orders orders;
-
 }

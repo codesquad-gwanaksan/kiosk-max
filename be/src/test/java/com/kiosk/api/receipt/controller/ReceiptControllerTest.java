@@ -81,10 +81,10 @@ class ReceiptControllerTest {
         Orders orders = Orders.builder()
             .orderId(orderId)
             .orderNumber(1L)
-            .orderDateTime("2023-06-21 12:00:00")
+            .orderDatetime("2023-06-21 12:00:00")
             .build();
 
-        Receipt receipt = new Receipt(orderId, orderProducts, payment, orders);
+        Receipt receipt = new Receipt(orders, orderProducts, payment);
         Mockito.when(receiptService.getReceiptInformation(orderId)).thenReturn(receipt);
     }
 
@@ -94,13 +94,13 @@ class ReceiptControllerTest {
         // when, then
         this.mockMvc.perform(get("/api/receipt"))
             .andDo(print())
-            .andExpect(jsonPath("$.orderId").value(equalTo(1)))
-            .andExpect(jsonPath("$.orderNumber").value(equalTo(1)))
+            .andExpect(jsonPath("$.orders.orderId").value(equalTo(1)))
+            .andExpect(jsonPath("$.orders.orderNumber").value(equalTo(1)))
+            .andExpect(jsonPath("$.orders.orderDatetime").value(equalTo("2023-06-21 12:00:00")))
             .andExpect(jsonPath("$.orderProducts").exists())
             .andExpect(jsonPath("$.payment.method").value(equalTo("card")))
             .andExpect(jsonPath("$.payment.totalPrice").value(equalTo(10000)))
-            .andExpect(jsonPath("$.payment.receivedPrice").value(equalTo(10000)))
             .andExpect(jsonPath("$.payment.remainedPrice").value(equalTo(0)))
-            .andExpect(jsonPath("$.orderDatetime").value(equalTo("2023-06-21 12:00:00")));
+            .andExpect(jsonPath("$.payment.receivedPrice").value(equalTo(10000)));
     }
 }

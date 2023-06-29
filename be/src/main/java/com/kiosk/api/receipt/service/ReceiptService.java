@@ -8,27 +8,22 @@ import com.kiosk.api.payment.domain.entity.Payment;
 import com.kiosk.api.payment.domain.repository.PaymentRepository;
 import com.kiosk.api.receipt.domain.entity.Receipt;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class ReceiptService {
 
     private final OrderProductRepository orderProductRepository;
     private final PaymentRepository paymentRepository;
     private final OrdersRepository ordersRepository;
 
-    public ReceiptService(OrderProductRepository orderProductRepository, PaymentRepository paymentRepository,
-                          OrdersRepository ordersRepository) {
-        this.orderProductRepository = orderProductRepository;
-        this.paymentRepository = paymentRepository;
-        this.ordersRepository = ordersRepository;
-    }
-
     public Receipt getReceiptInformation(Long orderId) {
         List<OrderProduct> products = orderProductRepository.findAllBy(orderId);
         Payment payment = paymentRepository.findByOrderId(orderId).orElseThrow(); // TODO: 예외처리
         Orders orders = ordersRepository.findBy(orderId).orElseThrow();
-        return new Receipt(orderId, products, payment, orders);
+        return new Receipt(orders, products, payment);
     }
 
 }

@@ -1,10 +1,9 @@
 package com.kiosk.api.order.domain.entity;
 
-import lombok.*;
-import org.springframework.scheduling.annotation.Scheduled;
-
-import java.time.LocalDate;
-import java.time.ZonedDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -14,6 +13,6 @@ public class Orders {
 
     private Long orderId;
     private Long orderNumber;
-    private String orderDateTime;
+    private String orderDatetime;
 
 }
