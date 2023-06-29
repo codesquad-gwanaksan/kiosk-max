@@ -82,7 +82,7 @@ public class JdbcProductRepository implements ProductRepository {
                 .id(rs.getLong("product_id"))
                 .name(rs.getString("product_name"))
                 .price(rs.getLong("product_price"))
-                .imageUrl(rs.getString("product_img_url"))
+                .imgUrl(rs.getString("product_img_url"))
                 .isBest(rs.getBoolean("product_is_best"))
                 .hasHot(rs.getBoolean("product_has_hot"))
                 .hasIce(rs.getBoolean("product_has_ice"))
