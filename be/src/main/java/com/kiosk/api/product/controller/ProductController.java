@@ -1,10 +1,10 @@
-package com.kiosk.api.product.web.controller;
+package com.kiosk.api.product.controller;
 
+import com.kiosk.api.product.controller.dto.ProductCategoryResponse;
+import com.kiosk.api.product.controller.dto.ProductDto;
 import com.kiosk.api.product.domain.entity.Category;
-import com.kiosk.api.product.web.controller.dto.ProductCategoryResponse;
-import com.kiosk.api.product.web.controller.dto.ProductDto;
-import com.kiosk.api.product.web.service.CategoryService;
-import com.kiosk.api.product.web.service.ProductService;
+import com.kiosk.api.product.service.CategoryService;
+import com.kiosk.api.product.service.ProductService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

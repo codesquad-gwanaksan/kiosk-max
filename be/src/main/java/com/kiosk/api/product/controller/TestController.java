@@ -1,7 +1,7 @@
-package com.kiosk.api.product.web.controller;
+package com.kiosk.api.product.controller;
 
-import com.kiosk.api.product.web.controller.dto.ProductDto;
-import com.kiosk.api.product.web.service.ProductService;
+import com.kiosk.api.product.controller.dto.ProductDto;
+import com.kiosk.api.product.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

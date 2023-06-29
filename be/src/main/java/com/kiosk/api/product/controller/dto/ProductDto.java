@@ -1,4 +1,4 @@
-package com.kiosk.api.product.web.controller.dto;
+package com.kiosk.api.product.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kiosk.api.product.domain.entity.Category;
