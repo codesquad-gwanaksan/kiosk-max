@@ -13,12 +13,14 @@ import com.kiosk.api.payment.domain.dto.PaymentRequestDto.CartInDto;
 import com.kiosk.api.payment.domain.dto.PaymentRequestDto.PayByCardInDto;
 import com.kiosk.api.payment.domain.dto.PaymentRequestDto.PayByCashInDto;
 import com.kiosk.api.payment.domain.repository.PaymentRepository;
+import com.kiosk.api.payment.service.PaymentService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -51,37 +53,37 @@ class PaymentControllerTest {
             int totalPrice = 10000;
             List<CartInDto> orderProducts = new ArrayList<>();
             orderProducts.add(CartInDto.builder()
-                .productId(1L)
-                .size("large")
-                .temperature("hot")
-                .amount(2)
-                .name("아메리카노")
-                .build());
+                    .productId(1L)
+                    .size("large")
+                    .temperature("hot")
+                    .amount(2)
+                    .name("아메리카노")
+                    .build());
             orderProducts.add(CartInDto.builder()
-                .productId(1L)
-                .size("small")
-                .temperature("ice")
-                .amount(2)
-                .name("아메리카노")
-                .build());
+                    .productId(1L)
+                    .size("small")
+                    .temperature("ice")
+                    .amount(2)
+                    .name("아메리카노")
+                    .build());
             orderProducts.add(CartInDto.builder()
-                .productId(1L)
-                .size("small")
-                .temperature("hot")
-                .amount(2)
-                .name("아메리카노")
-                .build());
+                    .productId(1L)
+                    .size("small")
+                    .temperature("hot")
+                    .amount(2)
+                    .name("아메리카노")
+                    .build());
             PayByCardInDto payByCardInDto = PayByCardInDto.builder()
-                .totalPrice(totalPrice)
-                .orderProducts(orderProducts)
-                .build();
+                    .totalPrice(totalPrice)
+                    .orderProducts(orderProducts)
+                    .build();
 
             this.mockMvc = MockMvcBuilders.standaloneSetup(paymentController)
-                .defaultRequest(post("/api/payment/card")
-                    .content(new ObjectMapper().writeValueAsString(payByCardInDto))
-                    .contentType(APPLICATION_JSON))
-                .alwaysExpect(status().isOk())
-                .build();
+                    .defaultRequest(post("/api/payment/card")
+                            .content(new ObjectMapper().writeValueAsString(payByCardInDto))
+                            .contentType(APPLICATION_JSON))
+                    .alwaysExpect(status().isOk())
+                    .build();
         }
 
         @Test
@@ -91,11 +93,11 @@ class PaymentControllerTest {
 
             // when, then
             this.mockMvc.perform(post("/api/payment/card"))
-                .andExpect(jsonPath("$.success").value(equalTo(true)))
-                .andExpect(jsonPath("$.data.orderId").value(equalTo(1)))
-                .andExpect(jsonPath("$.errorCode.status").value(equalTo(200)))
-                .andExpect(jsonPath("$.errorCode.code").value(equalTo("SUCCESS")))
-                .andExpect(jsonPath("$.errorCode.message").value(equalTo("카드 결제 성공하였습니다.")));
+                    .andExpect(jsonPath("$.success").value(equalTo(true)))
+                    .andExpect(jsonPath("$.data.orderId").value(equalTo(1)))
+                    .andExpect(jsonPath("$.errorCode.status").value(equalTo(200)))
+                    .andExpect(jsonPath("$.errorCode.code").value(equalTo("SUCCESS")))
+                    .andExpect(jsonPath("$.errorCode.message").value(equalTo("카드 결제 성공하였습니다.")));
         }
 
         @Test
@@ -105,12 +107,12 @@ class PaymentControllerTest {
 
             // when, then
             this.mockMvc.perform(post("/api/payment/card")
-                    .param("fail", "400"))
-                .andExpect(jsonPath("$.success").value(equalTo(false)))
-                .andExpect(jsonPath("$.data.orderId").doesNotExist())
-                .andExpect(jsonPath("$.errorCode.status").value(equalTo(400)))
-                .andExpect(jsonPath("$.errorCode.code").value(equalTo("PaymentError")))
-                .andExpect(jsonPath("$.errorCode.message").value(equalTo("결제가 실패했습니다. 잠시후에 시도해주세요.")));
+                            .param("fail", "400"))
+                    .andExpect(jsonPath("$.success").value(equalTo(false)))
+                    .andExpect(jsonPath("$.data.orderId").doesNotExist())
+                    .andExpect(jsonPath("$.errorCode.status").value(equalTo(400)))
+                    .andExpect(jsonPath("$.errorCode.code").value(equalTo("PaymentError")))
+                    .andExpect(jsonPath("$.errorCode.message").value(equalTo("결제가 실패했습니다. 잠시후에 시도해주세요.")));
         }
 
         @Test
@@ -120,12 +122,12 @@ class PaymentControllerTest {
 
             // when, then
             this.mockMvc.perform(post("/api/payment/card")
-                    .param("fail", "500"))
-                .andExpect(jsonPath("$.success").value(equalTo(false)))
-                .andExpect(jsonPath("$.data.orderId").doesNotExist())
-                .andExpect(jsonPath("$.errorCode.status").value(equalTo(500)))
-                .andExpect(jsonPath("$.errorCode.code").value(equalTo("ServerError")))
-                .andExpect(jsonPath("$.errorCode.message").value(equalTo("서버 에러입니다. 잠시 후에 이용해주세요.")));
+                            .param("fail", "500"))
+                    .andExpect(jsonPath("$.success").value(equalTo(false)))
+                    .andExpect(jsonPath("$.data.orderId").doesNotExist())
+                    .andExpect(jsonPath("$.errorCode.status").value(equalTo(500)))
+                    .andExpect(jsonPath("$.errorCode.code").value(equalTo("ServerError")))
+                    .andExpect(jsonPath("$.errorCode.message").value(equalTo("서버 에러입니다. 잠시 후에 이용해주세요.")));
         }
     }
 
@@ -140,10 +142,7 @@ class PaymentControllerTest {
         private PaymentController paymentController;
 
         @MockBean
-        private PaymentRepository paymentRepository;
-
-        @MockBean
-        private OrderProductRepository orderProductRepository;
+        private PaymentService paymentService;
 
         @BeforeEach
         public void beforeEach() throws JsonProcessingException {
@@ -151,38 +150,40 @@ class PaymentControllerTest {
             int receivedPrice = 10000;
             List<CartInDto> orderProducts = new ArrayList<>();
             orderProducts.add(CartInDto.builder()
-                .productId(1L)
-                .size("large")
-                .temperature("hot")
-                .amount(2)
-                .name("아메리카노")
-                .build());
+                    .productId(1L)
+                    .size("large")
+                    .temperature("hot")
+                    .amount(2)
+                    .name("아메리카노")
+                    .build());
             orderProducts.add(CartInDto.builder()
-                .productId(1L)
-                .size("small")
-                .temperature("ice")
-                .amount(2)
-                .name("아메리카노")
-                .build());
+                    .productId(1L)
+                    .size("small")
+                    .temperature("ice")
+                    .amount(2)
+                    .name("아메리카노")
+                    .build());
             orderProducts.add(CartInDto.builder()
-                .productId(1L)
-                .size("small")
-                .temperature("hot")
-                .amount(2)
-                .name("아메리카노")
-                .build());
+                    .productId(1L)
+                    .size("small")
+                    .temperature("hot")
+                    .amount(2)
+                    .name("아메리카노")
+                    .build());
             PayByCashInDto payByCashInDto = PayByCashInDto.builder()
-                .totalPrice(totalPrice)
-                .receivedPrice(receivedPrice)
-                .orderProducts(orderProducts)
-                .build();
+                    .totalPrice(totalPrice)
+                    .receivedPrice(receivedPrice)
+                    .orderProducts(orderProducts)
+                    .build();
 
             this.mockMvc = MockMvcBuilders.standaloneSetup(paymentController)
-                .defaultRequest(post("/api/payment/cash")
-                    .content(new ObjectMapper().writeValueAsString(payByCashInDto))
-                    .contentType(APPLICATION_JSON))
-                .alwaysExpect(status().isOk())
-                .build();
+                    .defaultRequest(post("/api/payment/cash")
+                            .content(new ObjectMapper().writeValueAsString(payByCashInDto))
+                            .contentType(APPLICATION_JSON))
+                    .alwaysExpect(status().isOk())
+                    .build();
+
+            Mockito.when(paymentService.createPaymentByCash(payByCashInDto)).thenReturn(1L);
         }
 
         @Test
@@ -192,11 +193,11 @@ class PaymentControllerTest {
 
             // when, then
             this.mockMvc.perform(post("/api/payment/cash"))
-                .andExpect(jsonPath("$.success").value(equalTo(true)))
-                .andExpect(jsonPath("$.data.orderId").value(equalTo(1)))
-                .andExpect(jsonPath("$.errorCode.status").value(equalTo(200)))
-                .andExpect(jsonPath("$.errorCode.code").value(equalTo("SUCCESS")))
-                .andExpect(jsonPath("$.errorCode.message").value(equalTo("현금 결제 성공하였습니다.")));
+                    .andExpect(jsonPath("$.success").value(equalTo(true)))
+                    .andExpect(jsonPath("$.data.orderId").value(equalTo(1)))
+                    .andExpect(jsonPath("$.errorCode.status").value(equalTo(200)))
+                    .andExpect(jsonPath("$.errorCode.code").value(equalTo("SUCCESS")))
+                    .andExpect(jsonPath("$.errorCode.message").value(equalTo("현금 결제 성공하였습니다.")));
         }
 
         @Test
@@ -206,12 +207,12 @@ class PaymentControllerTest {
 
             // when, then
             this.mockMvc.perform(post("/api/payment/cash")
-                    .param("fail", "400"))
-                .andExpect(jsonPath("$.success").value(equalTo(false)))
-                .andExpect(jsonPath("$.data.orderId").doesNotExist())
-                .andExpect(jsonPath("$.errorCode.status").value(equalTo(400)))
-                .andExpect(jsonPath("$.errorCode.code").value(equalTo("PaymentError")))
-                .andExpect(jsonPath("$.errorCode.message").value(equalTo("결제가 실패했습니다. 잠시후에 시도해주세요.")));
+                            .param("fail", "400"))
+                    .andExpect(jsonPath("$.success").value(equalTo(false)))
+                    .andExpect(jsonPath("$.data.orderId").doesNotExist())
+                    .andExpect(jsonPath("$.errorCode.status").value(equalTo(400)))
+                    .andExpect(jsonPath("$.errorCode.code").value(equalTo("PaymentError")))
+                    .andExpect(jsonPath("$.errorCode.message").value(equalTo("결제가 실패했습니다. 잠시후에 시도해주세요.")));
         }
 
         @Test
@@ -221,12 +222,12 @@ class PaymentControllerTest {
 
             // when, then
             this.mockMvc.perform(post("/api/payment/card")
-                    .param("fail", "500"))
-                .andExpect(jsonPath("$.success").value(equalTo(false)))
-                .andExpect(jsonPath("$.data.orderId").doesNotExist())
-                .andExpect(jsonPath("$.errorCode.status").value(equalTo(500)))
-                .andExpect(jsonPath("$.errorCode.code").value(equalTo("ServerError")))
-                .andExpect(jsonPath("$.errorCode.message").value(equalTo("서버 에러입니다. 잠시 후에 이용해주세요.")));
+                            .param("fail", "500"))
+                    .andExpect(jsonPath("$.success").value(equalTo(false)))
+                    .andExpect(jsonPath("$.data.orderId").doesNotExist())
+                    .andExpect(jsonPath("$.errorCode.status").value(equalTo(500)))
+                    .andExpect(jsonPath("$.errorCode.code").value(equalTo("ServerError")))
+                    .andExpect(jsonPath("$.errorCode.message").value(equalTo("서버 에러입니다. 잠시 후에 이용해주세요.")));
         }
     }
 }

@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -47,7 +48,7 @@ public class JdbcOrdersRepositoryImpl implements OrdersRepository {
     public Integer save(Orders orders) {
         orders.setOrderNumber(orderNumber++);
         String sql = "INSERT INTO orders (order_number, order_datetime) "
-            + "values (:orderNumber, :orderDatetime)";
+                + "values (:orderNumber, :orderDatetime)";
 
         SqlParameterSource param = new BeanPropertySqlParameterSource(orders);
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -55,16 +56,11 @@ public class JdbcOrdersRepositoryImpl implements OrdersRepository {
         return keyHolder.getKey().intValue();
     }
 
-        template.update(sql, param, keyHolder);
-
-        return Objects.requireNonNull(keyHolder.getKey()).intValue();
-    }
-
     @Override
     public Optional<Orders> findBy(Long orderId) {
         String sql = "SELECT order_id, order_number, order_datetime "
-            + "FROM orders "
-            + "WHERE order_id = :orderId";
+                + "FROM orders "
+                + "WHERE order_id = :orderId";
 
         SqlParameterSource param = new MapSqlParameterSource("orderId", orderId);
 
@@ -73,9 +69,9 @@ public class JdbcOrdersRepositoryImpl implements OrdersRepository {
 
     private RowMapper<Orders> rowMapper() {
         return (rs, rowNum) -> new Orders(
-            rs.getLong("order_id"),
-            rs.getLong("order_number"),
-            rs.getString("order_datetime")
+                rs.getLong("order_id"),
+                rs.getLong("order_number"),
+                rs.getString("order_datetime")
         );
     }
 }

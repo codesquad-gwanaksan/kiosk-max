@@ -17,7 +17,7 @@ public class OrdersService {
     public Integer createOrder() {
         return ordersRepository.save(
                 Orders.builder()
-                .orderDateTime(LocalDateTime.now().toString())
-                .build());
+                        .orderDatetime(LocalDateTime.now().toString())
+                        .build());
     }
 }
