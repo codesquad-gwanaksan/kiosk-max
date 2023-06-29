@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import { formatSameProductIdList } from 'utils';
 import styles from './Main.module.css';
 import MenuItem from './MenuItem';
+import ConfirmModal from 'components/Modal/ConfirmModal';
 
 interface CartProps {
   homeRef: React.RefObject<HTMLDivElement>;
@@ -26,12 +27,21 @@ export default function Cart({
   const [seconds, setSeconds] = useState(30);
   const intervalRef: { current: null | NodeJS.Timer } = useRef(null);
   const [showPaymentModal, setShowPaymentModal] = useState<boolean>(false);
+  const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
 
   const formattedSameProduct = formatSameProductIdList(orderList);
   const totalPrice = orderList.reduce((acc, cur) => {
     const { productId, amount } = cur;
     return acc + products[productId].price * amount;
   }, 0);
+
+  const resetCounter = (seconds: number) => {
+    setSeconds(seconds);
+
+    intervalRef.current = setInterval(() => {
+      setSeconds(prev => prev - 1);
+    }, 1000);
+  };
 
   const handlePaymentButtonClick = () => {
     clearInterval(intervalRef.current!);
@@ -40,11 +50,22 @@ export default function Cart({
 
   const handlePaymentCancelButtonClick = () => {
     setShowPaymentModal(false);
-    setSeconds(30);
+    resetCounter(30);
+  };
 
-    intervalRef.current = setInterval(() => {
-      setSeconds(prev => prev - 1);
-    }, 1000);
+  const confirmRemoveAllOrders = () => {
+    clearInterval(intervalRef.current!);
+    setShowConfirmModal(true);
+  };
+
+  const closeConfirmModal = () => {
+    setShowConfirmModal(false);
+    resetCounter(30);
+  };
+
+  const removeAllOrders = () => {
+    handleRemoveAllOrders();
+    setShowConfirmModal(false);
   };
 
   useEffect(() => {
@@ -93,7 +114,7 @@ export default function Cart({
           총 결제 금액 <span className={styles.totalPrice}>₩ {totalPrice.toLocaleString('ko-KR')}</span>
         </span>
         <span className={styles.timer}>{seconds}초 뒤에 메뉴가 전체 취소돼요!</span>
-        <button onClick={handleRemoveAllOrders} className={styles.allCancelButton}>
+        <button onClick={confirmRemoveAllOrders} className={styles.allCancelButton}>
           전체취소
         </button>
       </div>
@@ -107,6 +128,15 @@ export default function Cart({
             totalPrice={totalPrice}
             orderList={orderList}
             handlePaymentCancelButtonClick={handlePaymentCancelButtonClick}
+          />,
+          homeRef.current!
+        )}
+      {showConfirmModal &&
+        createPortal(
+          <ConfirmModal
+            text={'메뉴를 모두 취소하시겠습니까?'}
+            onClickYesButton={removeAllOrders}
+            onClickNoButton={closeConfirmModal}
           />,
           homeRef.current!
         )}
