@@ -40,9 +40,6 @@ public class OrderLogService {
         // isBest 업데이트
         List<Product> bestProducts = findHighestSalesAmountByCategory(orderLogList);
         productRepository.updateBestProducts(bestProducts);
-
-        // orderNumber 시퀀스 초기화
-        ordersRepository.updateSequence(1L, "orderNumber");
     }
 
 
