@@ -64,11 +64,11 @@ public class PaymentRequestDto {
     }
 
     private static Integer calculateChange(final Integer totalPrice, final Integer receivedPrice) {
-        if (totalPrice < receivedPrice) {
-            throw new RuntimeException("총액보다 받은 금액이 더 큽니다.");
+        if (totalPrice > receivedPrice) {
+            throw new RuntimeException("받은 금액보다 총액이 더 큽니다.");
         }
 
-        return totalPrice - receivedPrice;
+        return receivedPrice - totalPrice;
     }
 
     @Builder
