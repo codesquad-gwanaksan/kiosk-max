@@ -8,6 +8,7 @@ import com.kiosk.api.payment.domain.entity.Payment;
 import com.kiosk.api.payment.domain.repository.PaymentRepository;
 import com.kiosk.api.receipt.domain.entity.Receipt;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
