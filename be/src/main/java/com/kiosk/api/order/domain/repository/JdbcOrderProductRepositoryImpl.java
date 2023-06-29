@@ -27,7 +27,8 @@ public class JdbcOrderProductRepositoryImpl implements OrderProductRepository {
 
     @Override
     public Long save(OrderProduct orderProduct) {
-        String sql = "INSERT INTO order_product (order_product_name, order_product_amount, order_product_size, order_product_temperature, order_id, product_id) "
+        String sql =
+            "INSERT INTO order_product (order_product_name, order_product_amount, order_product_size, order_product_temperature, order_id, product_id) "
                 + "values (:name, :amount, :size, :temperature, :orderId, :productId)";
         SqlParameterSource param = new BeanPropertySqlParameterSource(orderProduct);
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -39,41 +40,43 @@ public class JdbcOrderProductRepositoryImpl implements OrderProductRepository {
     @Override
     public List<OrderProduct> findAllBy(Long orderId) {
         String sql = "SELECT order_product_name, order_product_size, order_product_temperature, order_product_amount "
-                + "FROM order_product "
-                + "WHERE order_id = :orderId";
+            + "FROM order_product "
+            + "WHERE order_id = :orderId";
         SqlParameterSource param = new MapSqlParameterSource("orderId", orderId);
         return template.query(sql, param, orderProductRowMapper());
     }
 
     private RowMapper<OrderProduct> orderProductRowMapper() {
         return (resultSet, rowNumber) -> OrderProduct.builder()
-                .name(resultSet.getString("order_product_name"))
-                .amount(resultSet.getInt("order_product_amount"))
-                .size(resultSet.getString("order_product_size"))
-                .temperature(resultSet.getString("order_product_temperature"))
-                .build();
+            .name(resultSet.getString("order_product_name"))
+            .amount(resultSet.getInt("order_product_amount"))
+            .size(resultSet.getString("order_product_size"))
+            .temperature(resultSet.getString("order_product_temperature"))
+            .build();
     }
 
 
     @Override
     public List<OrderLog> findByDate(LocalDate date) {
-        String sql = "SELECT op.product_id, SUM(op.order_product_amount) AS sales_amount " +
+        String sql =
+            "SELECT op.product_id, p.category_id, o.order_datetime, SUM(op.order_product_amount) AS sales_amount " +
                 "FROM order_product op " +
                 "JOIN orders o ON op.order_id = o.order_id " +
+                "JOIN product p on op.product_id = p.product_id " +
                 "WHERE DATE(o.order_datetime) = STR_TO_DATE(:date, '%Y-%m-%d') " +
-                "GROUP BY op.product_id";
+                "GROUP BY op.product_id, p.category_id, o.order_datetime";
 
         SqlParameterSource param = new MapSqlParameterSource("date", date.toString());
 
-        return template.query(sql, param, rowMapper(date));
+        return template.query(sql, param, rowMapper());
     }
 
-    private RowMapper<OrderLog> rowMapper(LocalDate date) {
+    private RowMapper<OrderLog> rowMapper() {
         return (rs, rowNum) -> OrderLog.builder()
-                .salesDate(date.toString())
-                .categoryId(rs.getLong("category_id"))
-                .productId(rs.getLong("product_id"))
-                .salesAmount(rs.getLong("sales_amount"))
-                .build();
+            .productId(rs.getLong("product_id"))
+            .categoryId(rs.getLong("category_id"))
+            .salesDate(rs.getDate("order_datetime").toString())
+            .salesAmount(rs.getLong("sales_amount"))
+            .build();
     }
 }

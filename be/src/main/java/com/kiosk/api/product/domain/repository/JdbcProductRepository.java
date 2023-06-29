@@ -93,20 +93,23 @@ public class JdbcProductRepository implements ProductRepository {
         };
     }
 
-
     @Override
     public void updateBestProducts(List<Product> bestProducts) {
+        // 모든 상품을 isBest -> false로 갱신
+        updateAllFalseForIsBest();
+        // 인기 상품에 대하여 isBest -> true로 갱신
         for (Product bestProduct : bestProducts) {
             updateBestProduct(bestProduct);
         }
     }
 
+    private void updateAllFalseForIsBest() {
+        String sql = "UPDATE product SET product_is_best = false";
+        template.update(sql);
+    }
+
     private void updateBestProduct(Product bestProduct) {
-        String sql = "UPDATE product SET product_is_best = (IF(product_id = :productId, true, false)) WHERE product_id = :productId";
-
-        SqlParameterSource param = new MapSqlParameterSource()
-                .addValue("productId", bestProduct.getId());
-
-        template.update(sql, param);
+        String sql = "UPDATE product SET product_is_best = true WHERE product_id = ?";
+        template.update(sql, bestProduct.getId());
     }
 }
