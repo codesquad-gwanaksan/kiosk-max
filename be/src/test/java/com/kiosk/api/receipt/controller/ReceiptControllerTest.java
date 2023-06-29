@@ -84,7 +84,7 @@ class ReceiptControllerTest {
             .orderDatetime("2023-06-21 12:00:00")
             .build();
 
-        Receipt receipt = new Receipt(orderId, orderProducts, payment, orders);
+        Receipt receipt = new Receipt(orders, orderProducts, payment);
         Mockito.when(receiptService.getReceiptInformation(orderId)).thenReturn(receipt);
     }
 
