@@ -19,10 +19,32 @@ import java.util.Optional;
 
 @Repository
 public class JdbcOrdersRepositoryImpl implements OrdersRepository {
+
+    private static int today;
+    private static Long orderNumber = 0L;
+
     private final NamedParameterJdbcTemplate template;
 
     public JdbcOrdersRepositoryImpl(NamedParameterJdbcTemplate template) {
         this.template = template;
+    }
+
+    static {
+        setToday();
+        dailyReset();
+    }
+
+    @Scheduled(cron = "0 0 0 * * *", zone = "Asia/Seoul")
+    public static void setToday() {
+        today = ZonedDateTime.now().toLocalDate().getDayOfMonth();
+    }
+
+    @Scheduled(cron = "0 0 0 * * *", zone = "Asia/Seoul")
+    public static void dailyReset() {
+        LocalDate current = ZonedDateTime.now().toLocalDate();
+        if (current.getDayOfMonth() - today >= 1) {
+            orderNumber = 0L;
+        }
     }
 
     @Override
