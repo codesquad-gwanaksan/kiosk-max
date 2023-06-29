@@ -50,15 +50,13 @@ public class JdbcOrdersRepositoryImpl implements OrdersRepository {
     @Override
     public Integer save(Orders orders) {
         orders.setOrderNumber(orderNumber++);
-        String sql = "INSERT INTO orders (order_id, order_number, order_datetime) "
-            + "values (:orderId, :orderNumber, :orderDatetime)";
+        String sql = "INSERT INTO orders (order_number, order_datetime) "
+            + "values (:orderNumber, :orderDatetime)";
 
-        SqlParameterSource param =
-            new MapSqlParameterSource("orders", orders)
-                .addValue("orderId", orders.getOrderId())
-                .addValue("orderNumber", orders.getOrderNumber())
-                .addValue("orderDatetime", orders.getOrderDateTime());
-        return template.update(sql, param);
+        SqlParameterSource param = new BeanPropertySqlParameterSource(orders);
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        template.update(sql, param, keyHolder);
+        return keyHolder.getKey().intValue();
     }
 
 
