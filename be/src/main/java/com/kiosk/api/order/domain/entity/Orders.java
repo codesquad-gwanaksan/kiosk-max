@@ -1,10 +1,6 @@
 package com.kiosk.api.order.domain.entity;
 
 import lombok.*;
-import org.springframework.scheduling.annotation.Scheduled;
-
-import java.time.LocalDate;
-import java.time.ZonedDateTime;
 
 @Getter
 @Setter

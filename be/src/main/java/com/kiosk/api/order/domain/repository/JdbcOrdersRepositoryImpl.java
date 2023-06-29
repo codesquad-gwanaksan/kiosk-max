@@ -50,17 +50,22 @@ public class JdbcOrdersRepositoryImpl implements OrdersRepository {
     @Override
     public Integer save(Orders orders) {
         orders.setOrderNumber(orderNumber++);
+
         String sql = "INSERT INTO orders (order_id, order_number, order_datetime) "
             + "values (:orderId, :orderNumber, :orderDatetime)";
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
 
         SqlParameterSource param =
             new MapSqlParameterSource("orders", orders)
                 .addValue("orderId", orders.getOrderId())
                 .addValue("orderNumber", orders.getOrderNumber())
                 .addValue("orderDatetime", orders.getOrderDateTime());
-        return template.update(sql, param);
-    }
 
+        template.update(sql, param, keyHolder);
+
+        return Objects.requireNonNull(keyHolder.getKey()).intValue();
+    }
 
     @Override
     public Optional<Orders> findBy(Long orderId) {
@@ -79,19 +84,5 @@ public class JdbcOrdersRepositoryImpl implements OrdersRepository {
             rs.getLong("order_number"),
             rs.getString("order_datetime")
         );
-    }
-
-    @Override
-    public Long findSequence(String name) {
-        String query = "SELECT sequence_value FROM sequence_table WHERE sequence_name = :name";
-        SqlParameterSource param = new MapSqlParameterSource("name", name);
-        return template.queryForObject(query, param, Long.class);
-    }
-
-    @Override
-    public void updateSequence(Long value, String name) {
-        String query = "UPDATE sequence_table SET sequence_value = :value WHERE sequence_name = :name";
-        SqlParameterSource param = new MapSqlParameterSource("value", value);
-        template.update(query, param);
     }
 }
