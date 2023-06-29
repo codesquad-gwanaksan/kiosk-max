@@ -8,8 +8,4 @@ public interface OrdersRepository {
     Integer save(Orders orders);
 
     Optional<Orders> findBy(Long orderId);
-
-    Long findSequence(String name);
-
-    void updateSequence(Long value, String name);
 }
