@@ -22,7 +22,7 @@ public class ReceiptService {
         List<OrderProduct> products = orderProductRepository.findAllBy(orderId);
         Payment payment = paymentRepository.findByOrderId(orderId).orElseThrow(); // TODO: 예외처리
         Orders orders = ordersRepository.findBy(orderId).orElseThrow();
-        return new Receipt(orderId, products, payment, orders);
+        return new Receipt(orders, products, payment);
     }
 
 }

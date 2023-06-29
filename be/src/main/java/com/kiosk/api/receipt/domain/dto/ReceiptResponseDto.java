@@ -17,13 +17,9 @@ import lombok.ToString;
 @ToString
 public class ReceiptResponseDto {
 
-    // TODO: 일단 API에 맞게 개발했으나, orders 관련 내용은 orders로 묶으면 좋을 것 같음. 프론트랑 논의 필요.
-    private Long orderId;
-    private Long orderNumber;
-
+    private OrdersResponseDto orders;
     private List<OrderProductResponseDto> orderProducts;
     private PaymentResponseDto payment;
-    private String orderDatetime;
 
     public static ReceiptResponseDto from(Receipt receipt) {
         List<OrderProductResponseDto> orderProducts = receipt.getOrderProducts().stream()
@@ -32,11 +28,9 @@ public class ReceiptResponseDto {
         PaymentResponseDto payment = PaymentResponseDto.from(receipt.getPayment());
         OrdersResponseDto orders = OrdersResponseDto.from(receipt.getOrders());
         return ReceiptResponseDto.builder()
-            .orderId(receipt.getOrderId())
-            .orderNumber(orders.getOrderNumber())
+            .orders(orders)
             .orderProducts(orderProducts)
             .payment(payment)
-            .orderDatetime(orders.getOrderDateTime())
             .build();
     }
 }
