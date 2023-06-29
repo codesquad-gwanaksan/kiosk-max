@@ -25,8 +25,6 @@ public class OrderLogService {
     private final OrderLogRepository orderLogRepository;
     private final OrderProductRepository orderProductRepository;
     private final ProductRepository productRepository;
-    private final CategoryRepository categoryRepository;
-    private final OrdersRepository ordersRepository;
 
     // 매일 0시에 실행하는 메서드
     @Transactional

@@ -57,6 +57,10 @@ public class JdbcOrdersRepositoryImpl implements OrdersRepository {
         return keyHolder.getKey().intValue();
     }
 
+        template.update(sql, param, keyHolder);
+
+        return Objects.requireNonNull(keyHolder.getKey()).intValue();
+    }
 
     @Override
     public Optional<Orders> findBy(Long orderId) {
@@ -75,19 +79,5 @@ public class JdbcOrdersRepositoryImpl implements OrdersRepository {
             rs.getLong("order_number"),
             rs.getString("order_datetime")
         );
-    }
-
-    @Override
-    public Long findSequence(String name) {
-        String query = "SELECT sequence_value FROM sequence_table WHERE sequence_name = :name";
-        SqlParameterSource param = new MapSqlParameterSource("name", name);
-        return template.queryForObject(query, param, Long.class);
-    }
-
-    @Override
-    public void updateSequence(Long value, String name) {
-        String query = "UPDATE sequence_table SET sequence_value = :value WHERE sequence_name = :name";
-        SqlParameterSource param = new MapSqlParameterSource("value", value);
-        template.update(query, param);
     }
 }
