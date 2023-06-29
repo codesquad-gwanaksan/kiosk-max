@@ -30,8 +30,8 @@ public class JdbcOrdersRepositoryImpl implements OrdersRepository {
     }
 
     static {
-        setToday();
         dailyReset();
+        setToday();
     }
 
     @Scheduled(cron = "0 0 0 * * *", zone = "Asia/Seoul")
