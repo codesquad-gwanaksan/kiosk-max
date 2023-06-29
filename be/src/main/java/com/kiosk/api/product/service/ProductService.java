@@ -1,7 +1,7 @@
 package com.kiosk.api.product.service;
 
-import com.kiosk.api.product.controller.dto.ProductDto;
 import com.kiosk.api.product.domain.repository.ProductRepository;
+import com.kiosk.api.product.web.controller.dto.ProductDto;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;

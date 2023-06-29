@@ -1,7 +1,7 @@
 package com.kiosk.api.product.domain.repository;
 
-import com.kiosk.api.product.controller.dto.ProductDto;
 import com.kiosk.api.product.domain.entity.Product;
+import com.kiosk.api.product.web.controller.dto.ProductDto;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
