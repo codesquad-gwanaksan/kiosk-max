@@ -13,6 +13,7 @@ import com.kiosk.api.payment.domain.repository.PaymentRepository;
 import com.kiosk.api.product.domain.entity.Product;
 import com.kiosk.api.product.domain.repository.ProductRepository;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -51,8 +52,10 @@ class OrderLogServiceTest {
     @Transactional
     public void dailyActions() {
         // given
+        LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
         // 주문 저장
-        ordersRepository.save(Orders.builder().orderId(1L).orderNumber(1L).orderDateTime("2023-06-28 08:00:00").build());
+        ordersRepository.save(
+            Orders.builder().orderId(1L).orderNumber(1L).orderDateTime(yesterday.toString()).build());
         List<OrderProduct> orderProducts = new ArrayList<>();
         orderProducts.add(
             OrderProduct.builder().orderId(1L).productId(1L).name("아메리카노").amount(1).size("small").temperature("ice")
@@ -90,7 +93,7 @@ class OrderLogServiceTest {
         // when
         orderLogService.dailyActions();
         // then
-        List<OrderLog> orderLogs = orderLogRepository.findAllByDate(LocalDate.of(2023, 6, 28));
+        List<OrderLog> orderLogs = orderLogRepository.findAllByDate(yesterday.toLocalDate());
         List<Product> bestProducts = productRepository.findAll().stream()
             .filter(Product::isBest)
             .collect(Collectors.toUnmodifiableList());
