@@ -1,12 +1,10 @@
 package com.kiosk.api.order.domain.repository;
 
-import com.kiosk.api.order.domain.entity.OrderProduct;
 import com.kiosk.api.order.domain.entity.Orders;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
