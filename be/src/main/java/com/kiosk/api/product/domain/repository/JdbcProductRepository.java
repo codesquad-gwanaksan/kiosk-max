@@ -32,7 +32,7 @@ public class JdbcProductRepository implements ProductRepository {
         template.update(connection -> {
             Category category = categoryRepository.findBy(dto.getCategoryId()).orElseThrow();
             PreparedStatement ps = connection.prepareStatement(
-                "INSERT INTO product(product_name, product_price, product_image, product_is_best, product_has_hot, "
+                "INSERT INTO product(product_name, product_price, product_img_url, product_is_best, product_has_hot, "
                     + "product_has_ice, product_has_large, product_has_small, category_id) "
                     + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)", new String[]{
                     "product_id"}); // KeyHolder에 자동생성된 값을 넣기 위해서 두번째 매개변수에 배열을 넣어야 합니다. 배열의 요소에는 pk 컬럼명을 넣어야 합니다.
@@ -54,14 +54,14 @@ public class JdbcProductRepository implements ProductRepository {
     @Override
     public List<Product> findAll() {
         return template.query(
-            "SELECT product_id, product_name, product_price, product_image, product_is_best, product_has_hot, product_has_ice, product_has_large, product_has_small, category_id "
+            "SELECT product_id, product_name, product_price, product_img_url, product_is_best, product_has_hot, product_has_ice, product_has_large, product_has_small, category_id "
                 + "FROM product", productRowMapper());
     }
 
     @Override
     public Optional<Product> findBy(final Long id) {
         List<Product> products = template.query(
-            "SELECT product_id, product_name, product_price, product_image, product_is_best, product_has_hot, product_has_ice, product_has_large, product_has_small, category_id "
+            "SELECT product_id, product_name, product_price, product_img_url, product_is_best, product_has_hot, product_has_ice, product_has_large, product_has_small, category_id "
                 + "FROM product WHERE product_id = ?", productRowMapper(), id);
         return products.stream().findAny();
     }
@@ -78,7 +78,7 @@ public class JdbcProductRepository implements ProductRepository {
                 .id(rs.getLong("product_id"))
                 .name(rs.getString("product_name"))
                 .price(rs.getLong("product_price"))
-                .imageUrl(rs.getString("product_image"))
+                .imageUrl(rs.getString("product_img_url"))
                 .isBest(rs.getBoolean("product_is_best"))
                 .hasHot(rs.getBoolean("product_has_hot"))
                 .hasIce(rs.getBoolean("product_has_ice"))

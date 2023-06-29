@@ -6,14 +6,22 @@ import static com.kiosk.api.payment.domain.entity.PaymentMethod.CASH;
 import com.kiosk.api.order.domain.entity.OrderProduct;
 import com.kiosk.api.payment.domain.entity.Payment;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 
 public class PaymentRequestDto {
+
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
     @Getter
     @Setter
     public static class PayByCashInDto {
+
         @NonNull
         private List<CartInDto> orderProducts;
         @NonNull
@@ -23,18 +31,22 @@ public class PaymentRequestDto {
 
         public Payment toEntity(Long orderId) {
             return Payment.builder()
-                    .orderId(orderId)
-                    .totalPrice(this.totalPrice)
-                    .receivedPrice(this.receivedPrice)
-                    .remainedPrice(calculateChange(this.totalPrice, this.receivedPrice))
-                    .method(CASH)
-                    .build();
+                .orderId(orderId)
+                .totalPrice(this.totalPrice)
+                .receivedPrice(this.receivedPrice)
+                .remainedPrice(calculateChange(this.totalPrice, this.receivedPrice))
+                .method(CASH)
+                .build();
         }
     }
 
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
     @Getter
     @Setter
     public static class PayByCardInDto {
+
         private List<CartInDto> orderProducts;
         private Integer totalPrice;
 
@@ -42,12 +54,12 @@ public class PaymentRequestDto {
             final int ZERO = 0;
 
             return Payment.builder()
-                    .orderId(orderId)
-                    .totalPrice(this.totalPrice)
-                    .receivedPrice(this.totalPrice)
-                    .remainedPrice(ZERO)
-                    .method(CARD)
-                    .build();
+                .orderId(orderId)
+                .totalPrice(this.totalPrice)
+                .receivedPrice(this.totalPrice)
+                .remainedPrice(ZERO)
+                .method(CARD)
+                .build();
         }
     }
 
@@ -59,9 +71,13 @@ public class PaymentRequestDto {
         return totalPrice - receivedPrice;
     }
 
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
     @Getter
     @Setter
     public static class CartInDto {
+
         private Long productId;
         private String name;
         private Integer amount;
@@ -70,13 +86,13 @@ public class PaymentRequestDto {
 
         public OrderProduct toEntity(Long orderId) {
             return OrderProduct.builder()
-                    .orderId(orderId)
-                    .amount(this.amount)
-                    .productId(this.productId)
-                    .name(this.name)
-                    .size(this.size)
-                    .temperature(this.temperature)
-                    .build();
+                .orderId(orderId)
+                .amount(this.amount)
+                .productId(this.productId)
+                .name(this.name)
+                .size(this.size)
+                .temperature(this.temperature)
+                .build();
         }
     }
 }
