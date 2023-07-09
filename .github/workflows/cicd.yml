@@ -2,7 +2,7 @@ name: ci-cd
 
 on:
   pull_request:
-    branches: [team-03, dev]
+    branches: [dev]
 
 env:
   working-directory: ./be
