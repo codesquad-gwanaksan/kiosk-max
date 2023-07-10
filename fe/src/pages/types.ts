@@ -1,17 +1,20 @@
-export interface Menus {
-  [key: string]: MenuInfo[];
+type ProductId = number;
+type CategoryId = number;
+
+export interface Products {
+  [key: ProductId]: ProductInfo;
 }
 
 export interface Categories {
-  [key: string]: CategoryInfo;
+  [key: CategoryId]: CategoryInfo;
 }
 
-export interface MenuInfo {
+export interface ProductInfo {
   name: string;
-  menuId: number;
+  productId: number;
   price: number;
   imgUrl: string;
-  isBest: boolean;
+  isBest?: boolean;
   hasLarge: boolean;
   hasSmall: boolean;
   hasHot: boolean;
@@ -20,37 +23,42 @@ export interface MenuInfo {
 
 export interface CategoryInfo {
   categoryName: string;
-  categoryId: string;
-  menus: MenuInfo[];
+  categoryId: number;
+  products: ProductInfo[];
 }
 
-export interface MenuOrder {
-  menuId: number;
+export interface ProductOrder {
+  productId: number;
+  name: string;
   size: string;
   temperature: string;
   amount: number;
 }
 
-interface OrderList {
-  orderItems: MenuOrder[];
-  totalPrice: number;
+export interface OrderSuccessInfo {
+  orders: {
+    orderId: number;
+    orderNumber: number;
+    orderDatetime: string;
+  };
+  orderProducts: OrderItem[];
+  payment: {
+    method: string;
+    totalPrice: number;
+    receivedPrice: number;
+    remainedPrice: number;
+  };
 }
 
-interface OrderSuccessInfo {
-  orderId: number;
-  orderItems: MenuOrder[];
-  paymentMethod: 'card' | 'cash';
-  totalPrice: number;
-  receivedPrice: number;
-  remainedPrice: number;
-  orderDateTime: string;
-}
-
-interface OrderResult {
+export interface OrderResult {
   success: boolean;
+  data: { orderId: number };
   errorCode: { status: number; code: string; message: string };
 }
 
-export interface AllMenus {
-  [key: string]: MenuInfo;
+export interface OrderItem {
+  name: string;
+  size: string;
+  temperature: string;
+  amount: number;
 }

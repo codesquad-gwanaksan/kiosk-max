@@ -1,0 +1,160 @@
+.wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 500px;
+  gap: 50px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: var(--color-white);
+}
+
+.contents {
+  width: 80%;
+  gap: 1rem;
+  display: flex;
+}
+
+.optionWrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.dualButtonWrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.singleButtonWrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.singleButtonWrap > button {
+  width: 100%;
+}
+
+.optionButton {
+  width: 48%;
+  height: 35px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: var(--color-gray-200);
+  background-color: var(--color-white);
+  border: 2px solid var(--color-gray-200);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-body-md);
+}
+
+.smallOptionButton,
+.largeOptionButton {
+  position: relative;
+  width: 48%;
+  height: 80px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: var(--color-gray-200);
+  background-color: var(--color-white);
+  border: 2px solid var(--color-gray-200);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-body-md);
+}
+
+.smallOptionButton > div,
+.largeOptionButton > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50%;
+}
+
+.smallOptionButton div > img {
+  width: 2.5rem;
+  height: 1.7rem;
+}
+
+.largeOptionButton div > img {
+  width: 3rem;
+  height: 2rem;
+}
+
+.selectedSize {
+  border: 3px solid var(--color-second-primary);
+}
+
+.selectedSize::before {
+  content: '';
+  position: absolute;
+  top: 40%;
+  left: 47%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-second-primary);
+  border-radius: 50%;
+}
+
+.selectedHot {
+  color: var(--color-white);
+  background-color: var(--color-hot);
+  border: none;
+}
+
+.selectedIce {
+  color: var(--color-white);
+  background-color: var(--color-ice);
+  border: none;
+}
+
+.counter {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.counter > button {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--color-primary);
+  border-radius: 50%;
+}
+
+.addButton {
+  width: 80%;
+  height: 50px;
+  color: #fff;
+  background-color: var(--color-primary);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-display);
+}
+
+.addButton:disabled {
+  background-color: var(--color-gray-100);
+  color: var(--color-gray-200);
+  cursor: default;
+}
+
+.menuItem {
+  position: relative;
+  width: 18rem;
+  height: 18rem;
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  border: 1px solid var(--color-gray-100);
+}

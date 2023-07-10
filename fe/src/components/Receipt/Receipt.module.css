@@ -1,0 +1,49 @@
+.receiptWrap {
+  padding: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  border-radius: 10px;
+  border: 2px solid var(--color-black);
+  background-color: var(--color-white);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-title-md);
+}
+
+.orderNumber {
+  margin-bottom: 1rem;
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-display);
+}
+
+.orderTime {
+  width: 100%;
+  text-align: end;
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-title-xs);
+}
+
+.orderLists {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin: 3rem 0rem;
+  width: 100%;
+}
+
+.orderList {
+  display: flex;
+  gap: 1rem;
+}
+
+.paymentInfo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-weight: var(--font-weight-bold);
+}

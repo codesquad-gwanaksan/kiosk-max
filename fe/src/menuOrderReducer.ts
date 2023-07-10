@@ -1,8 +1,8 @@
-import { MenuOrder } from 'pages/types';
+import { ProductOrder } from 'pages/types';
 
 export type ActionMap = {
-  ADD_ORDER: { newOrder: MenuOrder };
-  REMOVE_ORDER: { menuId: number };
+  ADD_ORDER: { newOrder: ProductOrder };
+  REMOVE_ORDER: { productId: number; size: string };
   RESET: {};
 };
 
@@ -13,13 +13,20 @@ export type MenuOrderAction = {
   };
 }[keyof ActionMap];
 
-export default function menuOrderReducer(initialOrders: MenuOrder[], action: MenuOrderAction): MenuOrder[] {
+export default function menuOrderReducer(initialOrders: ProductOrder[], action: MenuOrderAction): ProductOrder[] {
   switch (action.type) {
     case 'ADD_ORDER': {
-      return [...initialOrders, action.payload!.newOrder];
+      if (!action.payload) {
+        throw new Error('REMOVE_ORDER action must have payload');
+      }
+      return [...initialOrders, action.payload.newOrder];
     }
     case 'REMOVE_ORDER': {
-      return initialOrders.filter(order => order.menuId !== action.payload!.menuId);
+      if (!action.payload) {
+        throw new Error('REMOVE_ORDER action must have payload');
+      }
+      const { productId, size } = action.payload;
+      return initialOrders.filter(order => order.productId !== productId || order.size !== size);
     }
     case 'RESET': {
       return [];

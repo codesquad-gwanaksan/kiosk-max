@@ -2,9 +2,9 @@ import CategoryButton from './CategoryButton';
 import styles from './CategoryNavbar.module.css';
 
 interface CategoryNavbarProps {
-  handleCategoryClick: (categoryName: string) => void;
-  selectedCategoryId: string;
-  categories: { categoryId: string; categoryName: string }[];
+  handleCategoryClick: (categoryId: number) => void;
+  selectedCategoryId: number;
+  categories: { categoryId: number; categoryName: string }[];
 }
 
 export default function CategoryNavbar({ handleCategoryClick, selectedCategoryId, categories }: CategoryNavbarProps) {

@@ -1,0 +1,38 @@
+.cashOptionGrid {
+  width: 70%;
+  height: 40%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.optionGridCell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cashOptionButton {
+  width: 90%;
+  height: 70%;
+  background-color: var(--color-white);
+  color: var(--color-primary);
+  border-radius: 10px;
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-bold);
+  border: 2px solid var(--color-primary);
+}
+
+.cashPayment {
+  width: 50%;
+  height: 15%;
+  border-radius: 10px;
+  color: var(--color-white);
+  background-color: var(--color-gray-100);
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-bold);
+}
+
+.selected {
+  background-color: var(--color-primary);
+}

@@ -1,0 +1,43 @@
+.modalContent {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  width: 60%;
+  height: 30%;
+  border-radius: 10px;
+  background-color: var(--color-white);
+}
+
+.textContents {
+  color: var(--color-primary);
+  font-size: var(--font-size-display);
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 60%;
+  height: 30%;
+}
+
+.yesButton {
+  width: 47%;
+  height: 50%;
+  border-radius: 10px;
+  color: var(--color-white);
+  background-color: var(--color-second-primary);
+  font-size: var(--font-size-title-md);
+}
+
+.noButton {
+  width: 47%;
+  height: 50%;
+  border-radius: 10px;
+  color: var(--color-white);
+  background-color: var(--color-gray-100);
+  font-size: var(--font-size-title-md);
+}

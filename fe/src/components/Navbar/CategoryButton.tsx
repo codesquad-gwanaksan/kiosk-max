@@ -1,10 +1,10 @@
 import styles from './CategoryNavbar.module.css';
 
 interface CategoryButtonProps {
-  id: string;
+  id: number;
   categoryName: string;
   isActive: boolean;
-  handleCategoryClick: (categoryName: string) => void;
+  handleCategoryClick: (categoryId: number) => void;
 }
 
 export default function CategoryButton({ id, handleCategoryClick, categoryName, isActive }: CategoryButtonProps) {

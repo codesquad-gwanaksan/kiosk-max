@@ -1,9 +1,17 @@
 .categoryNavbar {
   width: 100%;
-  height: 20%;
+  min-height: 5rem;
   display: flex;
-  justify-content: space-around;
-  outline: 2px solid var(--color-primary);
+  overflow-x: scroll;
+  border-bottom: 2px solid var(--color-primary);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  touch-action: pan-x;
+  z-index: 1;
+}
+
+.categoryNavbar::-webkit-scrollbar {
+  display: none;
 }
 
 .categoryButton {
@@ -12,12 +20,13 @@
   outline: 2px solid var(--color-primary);
   padding: 1.5rem;
   cursor: pointer;
-  width: 100%;
+  width: 30%;
   height: 100%;
   font-family: var(--font-family);
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-display);
   line-height: auto;
+  flex: 0 0 auto;
 }
 
 .active {

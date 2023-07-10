@@ -1,0 +1,51 @@
+.receiptPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  width: 50rem;
+  height: 1103px;
+  box-sizing: border-box;
+}
+
+.timerInfo {
+  margin: 5rem 0rem 2rem 0rem;
+  color: var(--color-gray-200);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-display);
+}
+
+.seconds {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-display);
+}
+
+.title {
+  color: var(--color-primary);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-display);
+}
+
+.againRequestButton {
+  width: 15rem;
+  height: 10rem;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-bold);
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.error {
+  color: var(--color-gray-200);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-display);
+}

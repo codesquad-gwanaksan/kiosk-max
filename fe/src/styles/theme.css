@@ -37,6 +37,9 @@
   --color-gray-500: #4b5966;
   --color-black: #14212b;
   --color-primary: #1e3932;
+  --color-second-primary: #4aa568;
+  --color-hot: #ba4d42;
+  --color-ice: #3274f6;
 
   /* filter */
   --selected-viewer-filter: invert(39%) sepia(87%) saturate(438%) hue-rotate(188deg) brightness(89%) contrast(106%);

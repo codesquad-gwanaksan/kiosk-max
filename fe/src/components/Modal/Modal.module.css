@@ -1,0 +1,47 @@
+.dim {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(128, 128, 128, 0.7);
+  z-index: 1;
+}
+
+.modalContent {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  height: 40%;
+  gap: 50px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: var(--color-white);
+}
+
+.selected {
+  color: var(--color-white);
+  background-color: var(--color-primary);
+}
+
+.closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 1px solid black;
+  transform: translate(50%, -50%);
+  padding: 1.5rem;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

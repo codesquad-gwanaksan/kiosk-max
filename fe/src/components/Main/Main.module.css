@@ -1,195 +1,28 @@
 .main {
   position: relative;
-  padding: 1rem;
   gap: 1rem;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.menuItem {
-  width: 18rem;
-  height: 18rem;
-  gap: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 1rem;
-  padding: 2rem;
-  border: 1px solid black;
-  border-radius: 1rem;
-  background-color: var(--color-off-white);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  transition: all 0.3s ease-in-out;
-}
-
-.menuItem:hover {
-  cursor: pointer;
-  transform: scale(1.05);
-}
-
-.menuItem img {
-  border-radius: 1rem;
-  object-fit: scale-down;
-}
-
-.orderArea {
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem;
-  width: 100%;
-  outline: 2px solid var(--color-primary);
-}
-
-.orderItems {
-  width: 80%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 40%;
-  flex-wrap: wrap;
-  padding: 1rem;
-  gap: 1.5rem;
-}
-
-.orderItem {
-  width: 6rem;
-  height: 6rem;
-  margin: 0;
-  padding: 0.8rem;
-  font-family: var(--font-family);
-  font-weight: var(--font-weight-medium);
-  font-size: 10px;
-  line-height: auto;
-  overflow: hidden;
-  white-space: wrap;
-}
-
-.orderItem img {
-  width: 80%;
-  height: 80%;
-  object-fit: scale-down;
-  border-radius: 0.5rem;
-}
-
-.orderItem:hover {
-  cursor: default;
-  transform: none;
-}
-
-.itemWrapper {
-  position: relative;
-}
-
-.amount {
-  font-weight: var(--font-weight-bold);
-  color: var(--color-white);
-  width: 1.5rem;
-  height: 1.5rem;
-  padding: 0.5rem;
-  background-color: var(--color-primary);
-  border-radius: 50%;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-  top: -0.5rem;
-  left: -0.5rem;
-}
-
-.buttons {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: calc(100% - 40%);
-  gap: 1rem;
-}
-
-.menuCancelButton {
-  font-weight: var(--font-weight-bold);
-  color: var(--color-white);
-  width: 1.5rem;
-  height: 1.5rem;
-  padding: 0.5rem;
-  background-color: var(--color-black);
-  border-radius: 50%;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-  top: -0.5rem;
-  right: -0.5rem;
-}
-
-.allCancelButton {
-  padding: 1rem 5rem;
-  border-radius: 0.5rem;
-  background-color: var(--color-black);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  color: var(--color-white);
-  font-weight: var(--font-weight-bold);
-  cursor: pointer;
-}
-
-.orderButton {
-  padding: 1rem 5rem;
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  font-family: var(--font-family);
-  font-weight: var(--font-weight-bold);
-  font-size: 1.5rem;
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-}
-
-.timer {
-  font-family: var(--font-family);
-  font-weight: var(--font-weight-bold);
-  font-size: 1rem;
-  color: var(--color-primary);
-  margin: 1rem;
-}
-
-.menuCancelButton:hover {
-  cursor: pointer;
-  transform: scale(1.1);
-  transition: all 0.3s ease-in-out;
-}
-
-.OrderModal {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0px;
-  top: 0px;
-  left: 0px;
   width: 100%;
   height: 100%;
-  border: 1px solid black;
-  background-color: rgba(128, 128, 128, 0.7);
+  overflow-y: scroll;
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
-.best {
-  background-image: url('../../../public/assets/icon/best.png');
-  background-size: cover;
-  background-repeat: no-repeat;
+/* TODO: height를 어떻게 설정해야 main이 스크롤 될 때도 아래까지 다 덮을 수 있을까? */
+.mainDim {
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 4rem;
-  height: 4rem;
-  color: var(--color-white);
-  transform: translate(4rem, 1rem);
-  font-weight: var(--font-weight-bold);
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: rgba(128, 128, 128, 0.7);
   z-index: 1;
 }

@@ -1,26 +1,32 @@
-import { fetchMenus } from 'api';
-import MainPage from 'pages/MainPage';
-import { CategoryInfo } from 'pages/types';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import Home from 'pages/Home';
+import ReceiptPage from 'pages/ReceiptPage';
+import { useState } from 'react';
 import './App.css';
 
-function App() {
-  const [loading, setLoading]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(true);
-  const [menuData, setMenuData]: [CategoryInfo[], Dispatch<SetStateAction<[]>>] = useState([]);
-
-  const getMenus = async () => {
-    const menuData = await fetchMenus();
-    setMenuData(menuData);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    getMenus();
-  }, []);
-
-  return (
-    <div className="App">{loading ? <div>메뉴를 불러오고 있습니다...</div> : <MainPage allMenus={menuData} />}</div>
-  );
+export default function App() {
+  return <Router />;
 }
 
-export default App;
+function Router() {
+  const [page, setPage] = useState('/');
+  const navigate = (path: string) => {
+    setPage(path);
+    window.history.pushState({}, '', path);
+  };
+
+  const goHome = () => navigate('/');
+
+  let content;
+  const orderId = Number(page.split('/')[3]);
+
+  switch (page) {
+    case '/': {
+      content = <Home navigate={navigate} />;
+      break;
+    }
+    case `/receipt/orderId/${orderId}`: {
+      content = <ReceiptPage orderId={orderId} goHome={goHome} />;
+    }
+  }
+  return <div className="App">{content}</div>;
+}
